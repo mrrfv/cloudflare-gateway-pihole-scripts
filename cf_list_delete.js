@@ -31,7 +31,7 @@ async function getZeroTrustLists() {
     console.log(`Got ${lists.length} lists, ${cgps_lists.length} of which are CGPS lists that will be deleted.`);
 
     for (const list of cgps_lists) {
-        console.log(`Deleting list ${list.name} with ID ${list.id}`);
+        console.log(`Deleting list ` + process.env.CI ? "(redacted, running in CI)" : `${list.name} with ID ${list.id}`);
         const resp = await axios.request({
             method: 'DELETE',
             url: `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists/${list.id}`,
