@@ -17,8 +17,11 @@ jobs:
       with:
         node-version: 16
     
-    - name: Clone repository
-      run: git clone https://github.com/mrrfv/cloudflare-gateway-pihole-scripts.git
+    - name: Clone repository and switch to v1 branch
+      run: |
+        git clone https://github.com/mrrfv/cloudflare-gateway-pihole-scripts.git
+        cd cloudflare-gateway-pihole-scripts
+        git checkout v1
 
     - name: Install npm dependencies
       run: npm ci
