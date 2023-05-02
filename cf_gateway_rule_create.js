@@ -37,7 +37,7 @@ async function getZeroTrustLists() {
         wirefilter_expression = wirefilter_expression.slice(0, -4);
     }
     wirefilter_expression = wirefilter_expression.trim().replace('\n', '');
-    console.log(`Firewall expression contains ${wirefilter_expression.length} characters, and checks against ${filtered_lists.length} filter lists.`)
+    if (!process.env.CI) console.log(`Firewall expression contains ${wirefilter_expression.length} characters, and checks against ${filtered_lists.length} filter lists.`)
 
     const resp = await axios.request({
         method: 'POST',

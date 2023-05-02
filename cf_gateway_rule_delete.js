@@ -28,7 +28,7 @@ async function getZeroTrustRules() {
 
     if (!filtered_rule) return console.warn("No rule with matching name found - this is not an issue if you haven't run the create script yet. Exiting.");
 
-    console.log(`Deleting rule ` + process.env.CI ? "(redacted, running in CI)" : `${filtered_rule.name} with ID ${filtered_rule.id}`);
+    console.log(`Deleting rule`, process.env.CI ? "(redacted, running in CI)" : `${filtered_rule.name} with ID ${filtered_rule.id}`);
 
     const resp = await axios.request({
         method: 'DELETE',

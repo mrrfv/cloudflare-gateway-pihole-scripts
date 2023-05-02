@@ -7,7 +7,7 @@ const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
 const ACCOUNT_EMAIL = process.env.CLOUDFLARE_ACCOUNT_EMAIL;
 const LIST_ITEM_LIMIT = Number.isSafeInteger(Number(process.env.CLOUDFLARE_LIST_ITEM_LIMIT)) ? Number(process.env.CLOUDFLARE_LIST_ITEM_LIMIT) : 300000;
 
-console.log(`List item limit set to ${LIST_ITEM_LIMIT}`);
+if (!process.env.CI) console.log(`List item limit set to ${LIST_ITEM_LIMIT}`);
 
 // Read input.csv and parse domains
 fs.readFile('input.csv', 'utf8', async (err, data) => {
@@ -56,7 +56,7 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
 
   const listsToCreate = Math.ceil(domains.length / 1000);
 
-  console.log(`Found ${domains.length} valid domains in input.csv after cleanup - ${listsToCreate} list(s) will be created`);
+  if (!process.env.CI) console.log(`Found ${domains.length} valid domains in input.csv after cleanup - ${listsToCreate} list(s) will be created`);
 
   // Separate domains into chunks of 1000 (Cloudflare list cap)
   const chunks = chunkArray(domains, 1000);
@@ -75,7 +75,7 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
       await createZeroTrustList(listName, properList, (index+1), listsToCreate);
       await sleep(350); // Sleep for 350ms between list additions
     } catch (error) {
-      console.error(`Error creating list ` + process.env.CI ? "(redacted on CI)" :  `"${listName}": ${error.response.data}`);
+      console.error(`Error creating list `, process.env.CI ? "(redacted on CI)" :  `"${listName}": ${error.response.data}`);
     }
   }
 });
@@ -119,7 +119,7 @@ async function createZeroTrustList(name, items, currentItem, totalItems) {
   );
 
   const listId = response.data.result.id;
-  console.log(`Created Zero Trust list ` + process.env.CI ? "(redacted on CI)" : `"${name}" with ID ${listId} - ${totalItems - currentItem} left`);
+  console.log(`Created Zero Trust list`, process.env.CI ? "(redacted on CI)" : `"${name}" with ID ${listId} - ${totalItems - currentItem} left`);
 }
 
 function percentage(percent, total) {
