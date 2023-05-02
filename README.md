@@ -42,4 +42,13 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 
 This project can be run in GitHub Actions so your filter lists will be automatically updated and pushed to Cloudflare Gateway.
 
-[work in progress]
+1. Create a new empty, private repository. Forking or public repositories are not recommended - although the script never leaks your API keys and GitHub Actions secrets are automatically redacted from the logs, it's better to be safe than sorry.
+2. Create the following GitHub Actions secrets in your repository settings:
+
+- `CLOUDFLARE_API_KEY`: Your Cloudflare API key
+- `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
+- `CLOUDFLARE_ACCOUNT_EMAIL`: Your Cloudflare account email
+- `CLOUDFLARE_LIST_ITEM_LIMIT`: The maximum number of items allowed in a list. Use 300000 for the free plan or if you're unsure.
+
+3. Create a new file in the repository named `.github/workflows/main.yml` with the contents of `auto_update_github_action.yml` found in this repository. The default settings will update your filters every week at 3 AM UTC. You can change this by editing the `schedule` property.
+4. Enable GitHub Actions in your repository settings.
