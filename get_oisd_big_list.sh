@@ -22,4 +22,4 @@ for url in "${urls[@]}"; do
 done
 
 # print a message when done
-echo "Done. The input.csv file contains merged data from recommended filter lists."
+echo "Done. The input.csv file contains merged data from oisd blig list."

@@ -25,7 +25,8 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 1. Node.js installed on your machine
 2. Cloudflare [Zero Trust](https://one.dash.cloudflare.com/) account - the Free plan is enough. Use the Cloudflare [documentation](https://developers.cloudflare.com/cloudflare-one/) for details.
 3. Cloudflare email, API key (NOT the API token), and account ID
-4. A file containing the domains you want to block - **max 300,000 domains for the free plan** - in the working directory named `input.csv`. Mullvad provides awesome [DNS blocklists](https://github.com/mullvad/dns-blocklists) that work well with this project. A bash script that downloads recommended blocklists, `get_recommended_filters.sh`, is included.
+4. A file containing the domains you want to block - **max 300,000 domains for the free plan** - in the working directory named `input.csv`. Oisd provides awesome [DNS block collection](https://oisd.nl/includedlists/big) that work well with this project. A bash script that downloads the oisd big list (https://oisd.nl/), `get_oisd_big_list.sh`, is included.
+
 
 ### Running locally
 
@@ -33,7 +34,7 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 2. Run `npm install` to install dependencies.
 3. Copy `.env.example` to `.env` and fill in the values.
 4. If this is a subsequent run, execute `node cf_gateway_rule_delete.js` and `node cf_list_delete.js` (in order) to delete old data.
-5. If you're on Linux and haven't downloaded any filters yourself, use the `get_recommended_filters.sh` script to download recommended filter lists (about 250 000 domains).
+5. If you're on Linux and haven't downloaded any filters yourself, use the `get_oisd_big_list.sh` script to download recommended oisd big lists (about 280 000 domains).
 6. Run `node cf_list_create.js` to create the lists in Cloudflare Gateway. This will take a while.
 7. Run `node cf_gateway_rule_create.js` to create the firewall rule in Cloudflare Gateway.
 8. Profit!
