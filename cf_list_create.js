@@ -24,11 +24,15 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   }).map(domain => {
     // Remove "\r", "0.0.0.0 ", "127.0.0.1 ", "::1 " and similar from domain items
     return domain
-      .replace('\r', '')
-      .replace('0.0.0.0 ', '')
-      .replace('127.0.0.1 ', '')
-      .replace('::1 ', '')
-      .replace(':: ', '');
+    .replace('\r', '')
+    .replace('0.0.0.0 ', '')
+    .replace('127.0.0.1 ', '')
+    .replace('::1 ', '')
+    .replace(':: ', '')
+    .replace('|| ', '')
+    .replace('^ ', '')
+    .replace(/^\|\|/, '')  // Remove leading '||'
+    .replace(/\^$/, '');   // Remove trailing '^'
   }).filter(domain => {
     return domainValidationPattern.test(domain);
   });

@@ -5,14 +5,7 @@ touch input.csv
 
 # declare an array of urls
 urls=(
-  https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_adblock.txt
-  https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_gambling.txt
-  https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_privacy.txt
-  https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts
-  https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
-  https://rescure.me/rescure_domain_blacklist.txt
-  https://adaway.org/hosts.txt
-  https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+  https://big.oisd.nl/
 )
 
 # loop through the urls and download each file with curl
