@@ -9,7 +9,7 @@ const LIST_ITEM_LIMIT = Number.isSafeInteger(Number(process.env.CLOUDFLARE_LIST_
 
 if (!process.env.CI) console.log(`List item limit set to ${LIST_ITEM_LIMIT}`);
 
-let whitelist = [];
+
 
 // Read whitelist.csv and parse
 fs.readFile('whitelist.csv', 'utf8', async (err, data) => {
@@ -30,7 +30,9 @@ fs.readFile('whitelist.csv', 'utf8', async (err, data) => {
       .replace('0.0.0.0 ', '')
       .replace('127.0.0.1 ', '')
       .replace('::1 ', '')
-      .replace(':: ', '');
+      .replace(':: ', '')
+      .replace('||', '')
+      .replace('^', '');
   }).filter(domain => {
     return domainValidationPattern.test(domain);
   });
