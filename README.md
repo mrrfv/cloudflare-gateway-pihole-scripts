@@ -26,7 +26,7 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 2. Cloudflare [Zero Trust](https://one.dash.cloudflare.com/) account - the Free plan is enough. Use the Cloudflare [documentation](https://developers.cloudflare.com/cloudflare-one/) for details.
 3. Cloudflare email, API key (NOT the API token), and account ID
 4. A file containing the domains you want to block - **max 300,000 domains for the free plan** - in the working directory named `input.csv`. Mullvad provides awesome [DNS blocklists](https://github.com/mullvad/dns-blocklists) that work well with this project. A bash script that downloads recommended blocklists, `get_recommended_filters.sh`, is included.
-5. Optional: You can add whitelist domains to the `get_reccomended_whitelist.sh` if you wish.
+5. Optional: You can add whitelist domains to the `get_recomended_whitelist.sh` if you wish.
 
 ### Running locally
 
