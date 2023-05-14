@@ -62,7 +62,6 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   });
   
   // Remove domains from the domains array that are present in the whitelist array
-  const whitelist = whitelist
   domains = domains.filter(domain => {
     return !whitelist.includes(domain);
   });
