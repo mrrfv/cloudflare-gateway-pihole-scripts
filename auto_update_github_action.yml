@@ -30,6 +30,10 @@ jobs:
     - name: Download recommended filters
       run: bash ./get_recommended_filters.sh
       working-directory: cloudflare-gateway-pihole-scripts
+
+    - name: Download recommended whitelist
+      run: bash ./get_recommended_whitelist.sh
+      working-directory: cloudflare-gateway-pihole-scripts
     
     - name: Delete old rules and lists
       run: |
