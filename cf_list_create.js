@@ -9,6 +9,8 @@ const LIST_ITEM_LIMIT = Number.isSafeInteger(Number(process.env.CLOUDFLARE_LIST_
 
 if (!process.env.CI) console.log(`List item limit set to ${LIST_ITEM_LIMIT}`);
 
+let whitelist = []; // Define an empty array for the whitelist
+
 
 
 // Read whitelist.csv and parse
