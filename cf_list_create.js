@@ -34,6 +34,8 @@ fs.readFile('whitelist.csv', 'utf8', async (err, data) => {
       .replace('::1 ', '')
       .replace(':: ', '')
       .replace('||', '')
+      .replace('@@||', '')
+      .replace('^$important', '')
       .replace('^', '');
   }).filter(domain => {
     return domainValidationPattern.test(domain);
