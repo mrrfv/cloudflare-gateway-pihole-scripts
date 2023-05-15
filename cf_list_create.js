@@ -9,6 +9,39 @@ const LIST_ITEM_LIMIT = Number.isSafeInteger(Number(process.env.CLOUDFLARE_LIST_
 
 if (!process.env.CI) console.log(`List item limit set to ${LIST_ITEM_LIMIT}`);
 
+let whitelist = []; // Define an empty array for the whitelist
+
+// Read whitelist.csv and parse
+fs.readFile('whitelist.csv', 'utf8', async (err, data) => {
+  if (err) {
+    console.warn('Error reading whitelist.csv:', err);
+    console.warn('Assuming whitelist is empty.')
+  } else {
+    // Convert into array and cleanup whitelist
+    const domainValidationPattern = /^(?!-)[A-Za-z0-9-]+([\-\.]{1}[a-z0-9]+)*\.[A-Za-z]{2,6}$/;
+    whitelist = data.split('\n').filter(domain => {
+      // Remove entire lines starting with "127.0.0.1" or "::1", empty lines or comments
+      return domain && !domain.startsWith('#') && !domain.startsWith('//') && !domain.startsWith('/*') && !domain.startsWith('*/') && !(domain === '\r');
+    }).map(domain => {
+      // Remove "\r", "0.0.0.0 ", "127.0.0.1 ", "::1 " and similar from domain items
+      return domain
+        .replace('\r', '')
+        .replace('0.0.0.0 ', '')
+        .replace('127.0.0.1 ', '')
+        .replace('::1 ', '')
+        .replace(':: ', '')
+        .replace('||', '')
+        .replace('@@||', '')
+        .replace('^$important', '')
+        .replace('^', '');
+    }).filter(domain => {
+      return domainValidationPattern.test(domain);
+    });
+  }  
+});
+
+console.log(`Found ${whitelist.length} valid domains in whitelist.`);
+
 // Read input.csv and parse domains
 fs.readFile('input.csv', 'utf8', async (err, data) => {
   if (err) {
@@ -28,11 +61,21 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
       .replace('0.0.0.0 ', '')
       .replace('127.0.0.1 ', '')
       .replace('::1 ', '')
-      .replace(':: ', '');
+      .replace(':: ', '')
+      .replace('^', '')
+      .replace('||', '')
+      .replace('@@||', '')
+      .replace('^$important', '')
+      .replace('^', '');
   }).filter(domain => {
     return domainValidationPattern.test(domain);
   });
   
+  // Remove domains from the domains array that are present in the whitelist array
+  domains = domains.filter(domain => {
+    return !whitelist.includes(domain);
+  });
+
   // Trim array to 300,000 domains if it's longer than that
   if (domains.length > LIST_ITEM_LIMIT) {
     domains = trimArray(domains, LIST_ITEM_LIMIT);
@@ -130,3 +173,4 @@ function percentage(percent, total) {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
