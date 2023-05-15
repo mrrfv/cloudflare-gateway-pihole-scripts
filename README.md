@@ -44,6 +44,8 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 
 These scripts can be run using GitHub Actions so your filters will be automatically updated and pushed to Cloudflare Gateway. This is useful if you are using a frequently updated malware blocklist.
 
+Please note that the GitHub Action downloads the recommended blocklists and whitelist by default. You can change this behavior by editing the file.
+
 1. Create a new empty, private repository. Forking or public repositories are discouraged, but supported - although the script never leaks your API keys and GitHub Actions secrets are automatically redacted from the logs, it's better to be safe than sorry.
 2. Create the following GitHub Actions secrets in your repository settings:
 
