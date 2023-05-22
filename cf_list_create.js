@@ -33,6 +33,7 @@ fs.readFile('whitelist.csv', 'utf8', async (err, data) => {
         .replace('||', '')
         .replace('@@||', '')
         .replace('^$important', '')
+        .replace('*.', '')
         .replace('^', '');
     }).filter(domain => {
       return domainValidationPattern.test(domain);
@@ -66,6 +67,7 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
       .replace('||', '')
       .replace('@@||', '')
       .replace('^$important', '')
+      .replace('*.', '')
       .replace('^', '');
   }).filter(domain => {
     return domainValidationPattern.test(domain);
