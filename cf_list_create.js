@@ -72,17 +72,6 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   }).filter(domain => {
     return domainValidationPattern.test(domain);
   });
-  
-  // Remove domains from the domains array that are present in the whitelist array
-  domains = domains.filter(domain => {
-    return !whitelist.includes(domain);
-  });
-
-  // Trim array to 300,000 domains if it's longer than that
-  if (domains.length > LIST_ITEM_LIMIT) {
-    domains = trimArray(domains, LIST_ITEM_LIMIT);
-    console.warn(`More than ${LIST_ITEM_LIMIT} domains found in input.csv - input has to be trimmed`);
-  }
 
   // Check for duplicates in domains array
   let uniqueDomains = [];
@@ -98,6 +87,17 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
 
   // Replace domains array with uniqueDomains array
   domains = uniqueDomains;
+
+  // Remove domains from the domains array that are present in the whitelist array
+  domains = domains.filter(domain => {
+    return !whitelist.includes(domain);
+  });
+
+  // Trim array to 300,000 domains if it's longer than that
+  if (domains.length > LIST_ITEM_LIMIT) {
+    domains = trimArray(domains, LIST_ITEM_LIMIT);
+    console.warn(`More than ${LIST_ITEM_LIMIT} domains found in input.csv - input has to be trimmed`);
+  }
 
   const listsToCreate = Math.ceil(domains.length / 1000);
 
@@ -175,4 +175,3 @@ function percentage(percent, total) {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
