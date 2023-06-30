@@ -90,7 +90,11 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
 
   // Remove domains from the domains array that are present in the whitelist array
   domains = domains.filter(domain => {
-    return !whitelist.includes(domain);
+    if (whitelist.includes(domain)) {
+      console.warn(`Domain found in the whitelist: ${domain} - removing`);
+      return false;
+    }
+    return true;
   });
 
   // Trim array to 300,000 domains if it's longer than that
