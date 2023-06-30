@@ -63,4 +63,4 @@ jobs:
       env:
         PING_URL: ${{ secrets.PING_URL }}
       run: |
-        node -e "var https=require('https');https.get('${{ env.PING_URL }}').on('error',err=>console.log('Ping failed: '+err));"
+        curl "${{ env.PING_URL }}"
