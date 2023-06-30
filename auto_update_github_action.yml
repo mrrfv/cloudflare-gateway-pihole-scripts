@@ -59,5 +59,8 @@ jobs:
 
     - name: Send ping request
       if: env.PING_URL != ''
+      working-directory: cloudflare-gateway-pihole-scripts
+      env:
+        PING_URL: ${{ secrets.PING_URL }}
       run: |
-        node -e "var https=require('https');https.get('${{ secrets.PING_URL }}').on('error',err=>console.log('Ping failed: '+err));"
+        node -e "var https=require('https');https.get('${{ env.PING_URL }}').on('error',err=>console.log('Ping failed: '+err));"
