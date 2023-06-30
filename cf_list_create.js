@@ -38,10 +38,10 @@ fs.readFile('whitelist.csv', 'utf8', async (err, data) => {
     }).filter(domain => {
       return domainValidationPattern.test(domain);
     });
+    console.log(`Found ${whitelist.length} valid domains in whitelist.`);
   }  
 });
 
-console.log(`Found ${whitelist.length} valid domains in whitelist.`);
 
 // Read input.csv and parse domains
 fs.readFile('input.csv', 'utf8', async (err, data) => {
