@@ -7,7 +7,6 @@ touch whitelist.csv
 
 # declare an array of urls
 urls=(
-      https://adaway.org/hosts.txt #test
     https://raw.githubusercontent.com/im-sm/Pi-hole-Torrent-Blocklist/main/all-torrent-trackres.txt
     https://raw.githubusercontent.com/AdguardTeam/HttpsExclusions/master/exclusions/banks.txt
     https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
