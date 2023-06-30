@@ -56,3 +56,8 @@ jobs:
         CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
         CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
+
+    - name: Send ping request
+      if: env.PING_URL != ''
+      run: |
+        node -e "var https=require('https');https.get('${{ secrets.PING_URL }}').on('error',err=>console.log('Ping failed: '+err));"
