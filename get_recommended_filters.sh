@@ -11,6 +11,7 @@ urls=(
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/dyndns.txt
   https://blocklistproject.github.io/Lists/alt-version/ads-nl.txt
   https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/malware/domains
+  https://raw.githubusercontent.com/nextdns/services/main/services/youtube
 )
 
 # loop through the urls and download each file with curl
