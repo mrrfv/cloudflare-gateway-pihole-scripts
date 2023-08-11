@@ -8,6 +8,12 @@ urls=(
   https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
   https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/domain.txt
   https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
+  https://raw.githubusercontent.com/mitchellkrogza/The-Big-List-of-Hacked-Malware-Web-Sites/master/hosts
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/dyndns.txt
+  https://raw.githubusercontent.com/StevenBlack/hosts/master/data/add.Risk/hosts
+  https://raw.githubusercontent.com/infinitytec/blocklists/master/scams-and-phishing.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.txt
+  https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/gambling/domains
 )
 
 # loop through the urls and download each file with curl
