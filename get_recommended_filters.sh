@@ -12,7 +12,7 @@ urls=(
   https://blocklistproject.github.io/Lists/alt-version/ads-nl.txt
   https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/malware/domains
   https://raw.githubusercontent.com/nextdns/services/main/services/youtube
-  https://gh-pages.ewpratten.com/youtube_ad_blocklist/adblockplus.txt
+  https://easylist-downloads.adblockplus.org/liste_ar.txt
 )
 
 # loop through the urls and download each file with curl
