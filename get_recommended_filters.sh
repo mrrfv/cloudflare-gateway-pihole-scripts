@@ -9,6 +9,9 @@ urls=(
   https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/domain.txt
   https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/dyndns.txt
+  https://blocklistproject.github.io/Lists/alt-version/ads-nl.txt
+  https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareDomains.txt
+  
 )
 
 # loop through the urls and download each file with curl
