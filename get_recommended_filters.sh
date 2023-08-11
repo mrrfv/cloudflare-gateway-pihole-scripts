@@ -10,8 +10,7 @@ urls=(
   https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/dyndns.txt
   https://blocklistproject.github.io/Lists/alt-version/ads-nl.txt
-  https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/malware
-  
+  https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/malware/domains
 )
 
 # loop through the urls and download each file with curl
