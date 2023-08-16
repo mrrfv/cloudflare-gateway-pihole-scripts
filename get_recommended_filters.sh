@@ -5,15 +5,13 @@ touch input.csv
 
 # declare an array of urls
 urls=(
-  https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
-  https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/domain.txt
-  https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/dyndns.txt
-  https://blocklistproject.github.io/Lists/alt-version/ads-nl.txt
-  https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/malware/domains
-  https://raw.githubusercontent.com/nextdns/services/main/services/youtube
-  https://easylist-downloads.adblockplus.org/liste_ar.txt
-  https://raw.githubusercontent.com/nickspaargaren/no-google/master/wildcards-domains
+   https://raw.githubusercontent.com/AdguardTeam/AdGuardSDNSFilter/master/Filters/exclusions.txt
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
+   https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains
+   # Commented out because it looks suspicious
+   https://raw.githubusercontent.com/AdguardTeam/HttpsExclusions/master/exclusions/issues.txt
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist-referral.txt
+   # https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/referral-sites.txt
 )
 
 # loop through the urls and download each file with curl
