@@ -7,12 +7,10 @@ touch input.csv
 urls=(
   https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
   https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
-  https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/gambling/domains
   https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn/hosts
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/dyndns.txt
   https://raw.githubusercontent.com/mitchellkrogza/The-Big-List-of-Hacked-Malware-Web-Sites/master/hosts
   https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareDomains.txt
-  https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/ultimate.txt
   https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/wildcard.txt
 )
