@@ -10,8 +10,6 @@ urls=(
    https://raw.githubusercontent.com/AdguardTeam/AdGuardSDNSFilter/master/Filters/exclusions.txt
    https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt
    https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains
-   https://raw.githubusercontent.com/AdguardTeam/HttpsExclusions/master/exclusions/issues.txt
-   # https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/referral-sites.txt
 )
 
 # loop through the urls and download each file with curl
