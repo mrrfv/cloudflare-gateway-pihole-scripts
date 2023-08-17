@@ -5,14 +5,12 @@ touch input.csv
 
 # declare an array of urls
 urls=(
+  https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/domain.txt
   https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
-  https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
-  https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn/hosts
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/dyndns.txt
-  https://raw.githubusercontent.com/mitchellkrogza/The-Big-List-of-Hacked-Malware-Web-Sites/master/hosts
-  https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareDomains.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/ultimate.txt
-  https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/wildcard.txt
+  https://raw.githubusercontent.com/StevenBlack/hosts/master/data/add.Risk/hosts
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/tif.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/light.txt
+  https://www.stopforumspam.com/downloads/toxic_domains_whole.txt
 )
 
 # loop through the urls and download each file with curl
