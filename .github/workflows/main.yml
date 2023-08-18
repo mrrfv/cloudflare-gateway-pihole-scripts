@@ -1,0 +1,44 @@
+name: Update Filter Lists
+
+on:
+  schedule:
+    - cron: "0 21 * * *"
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  cgps:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+ 
+    - name: Install npm dependencies
+      run: npm ci
+ 
+    - name: Download recommended whitelist
+      run: bash ./get_recommended_whitelist.sh
+ 
+    - name: Download recommended filters
+      run: bash ./get_recommended_filters.sh
+ 
+    - name: Delete old rules and lists
+      run: |
+        node cf_gateway_rule_delete.js
+        node cf_list_delete.js
+      env:
+        CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+        CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
+
+    - name: Create new rules and lists
+      run: |
+        node cf_list_create.js
+        node cf_gateway_rule_create.js
+      env:
+        CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+        CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
