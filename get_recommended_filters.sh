@@ -8,9 +8,12 @@ urls=(
   https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/domain.txt
   https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
   https://raw.githubusercontent.com/StevenBlack/hosts/master/data/add.Risk/hosts
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/tif.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/light.txt
+  https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
   https://www.stopforumspam.com/downloads/toxic_domains_whole.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/dyndns.txt
+  https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/malware
+  https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/malware/domains
+  https://raw.githubusercontent.com/jerryn70/GoodbyeAds/master/Hosts/GoodbyeAds.txt
 )
 
 # loop through the urls and download each file with curl
