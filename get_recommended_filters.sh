@@ -17,6 +17,7 @@ urls=(
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/multi.txt
   https://abpvn.com/vip/hiepchau96.txt
   https://abpvn.com/android/abpvn.txt
+  https://raw.githubusercontent.com/abpvn/abpvn/master/filter/abpvn.txt
   
     )
 
