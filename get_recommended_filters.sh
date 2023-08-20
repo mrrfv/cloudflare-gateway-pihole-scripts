@@ -34,6 +34,9 @@ urls=(
   https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/multi.txt
   https://raw.githubusercontent.com/adv247/IOS/master/ZALO_Block_All.txt
+  https://raw.githubusercontent.com/notracking/hosts-blocklists-scripts/master/hostnames.dead.txt
+  https://gitlab.com/quidsup/notrack-blocklists/-/raw/master/notrack-blocklist.txt
+  https://raw.githubusercontent.com/adv247/Block-OTA-ADS/master/tiktok.txt
     )
 
 # loop through the urls and download each file with curl
