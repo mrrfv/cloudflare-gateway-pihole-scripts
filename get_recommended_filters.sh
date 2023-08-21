@@ -37,6 +37,17 @@ urls=(
   https://raw.githubusercontent.com/notracking/hosts-blocklists-scripts/master/hostnames.dead.txt
   https://gitlab.com/quidsup/notrack-blocklists/-/raw/master/notrack-blocklist.txt
   https://raw.githubusercontent.com/adv247/Block-OTA-ADS/master/tiktok.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.apple.txt
+  https://raw.githubusercontent.com/adv247/IOS/master/ZALO_Block_All.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.extended.txt
+  https://github.com/hagezi/dns-blocklists/blob/main/domains/native.winoffice.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.amazon.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.huawei.txt
+  https://cdn.jsdelivr.net/gh/bogachenko/fuckfuckadblock@master/fuckfuckadblock.txt
+  https://raw.githubusercontent.com/notracking/hosts-blocklists/master/dnscrypt-proxy/dnscrypt-proxy.blacklist.txt
+  https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_adblock.txt
+  
     )
 
 # loop through the urls and download each file with curl
