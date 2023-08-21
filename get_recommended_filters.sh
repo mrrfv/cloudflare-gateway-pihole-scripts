@@ -45,7 +45,8 @@ urls=(
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.amazon.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.huawei.txt
   https://cdn.jsdelivr.net/gh/bogachenko/fuckfuckadblock@master/fuckfuckadblock.txt
-  
+  https://raw.githubusercontent.com/notracking/hosts-blocklists/master/dnscrypt-proxy/dnscrypt-proxy.blacklist.txt
+  https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_adblock.txt
     )
 
 # loop through the urls and download each file with curl
