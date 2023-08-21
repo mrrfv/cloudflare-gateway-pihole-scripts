@@ -48,6 +48,10 @@ urls=(
   https://raw.githubusercontent.com/notracking/hosts-blocklists/master/dnscrypt-proxy/dnscrypt-proxy.blacklist.txt
   https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_adblock.txt
   https://raw.githubusercontent.com/jerryn70/GoodbyeAds/master/Hosts/GoodbyeAds.txt
+  https://raw.githubusercontent.com/ethan-xd/ethan-xd.github.io/master/fb.txt
+  https://hostfiles.frogeye.fr/firstparty-only-trackers.txt
+  https://gitlab.com/kowith337/PersonalFilterListCollection/raw/master/hosts/hosts_leftover.txt
+  https://cdn.iblockads.net/iblockads.net.txt
     )
 
 # loop through the urls and download each file with curl
