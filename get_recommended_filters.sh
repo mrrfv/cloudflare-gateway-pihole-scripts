@@ -52,6 +52,23 @@ urls=(
   https://hostfiles.frogeye.fr/firstparty-only-trackers.txt
   https://gitlab.com/kowith337/PersonalFilterListCollection/raw/master/hosts/hosts_leftover.txt
   https://cdn.iblockads.net/iblockads.net.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.apple.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/gambling.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.lgwebos.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/anti.piracy-onlydomains.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/hoster.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/nosafesearch.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/nosafesearch-onlydomains.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/doh.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh-vpn-proxy-bypass.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/doh-vpn-proxy-bypass-onlydomains.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/multi.txt
+  
     )
 
 # loop through the urls and download each file with curl
