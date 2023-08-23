@@ -5,7 +5,7 @@ touch input.csv
 
 # declare an array of urls
 urls=(
-  https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_adblock.txt
+    https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_adblock.txt
   https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_gambling.txt
   https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_privacy.txt
   https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts
@@ -38,7 +38,6 @@ urls=(
   https://gitlab.com/quidsup/notrack-blocklists/-/raw/master/notrack-blocklist.txt
   https://raw.githubusercontent.com/adv247/Block-OTA-ADS/master/tiktok.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.apple.txt
-  https://raw.githubusercontent.com/adv247/IOS/master/ZALO_Block_All.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.extended.txt
   https://github.com/hagezi/dns-blocklists/blob/main/domains/native.winoffice.txt
@@ -49,10 +48,7 @@ urls=(
   https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_adblock.txt
   https://raw.githubusercontent.com/jerryn70/GoodbyeAds/master/Hosts/GoodbyeAds.txt
   https://raw.githubusercontent.com/ethan-xd/ethan-xd.github.io/master/fb.txt
-  https://hostfiles.frogeye.fr/firstparty-only-trackers.txt
-  https://gitlab.com/kowith337/PersonalFilterListCollection/raw/master/hosts/hosts_leftover.txt
   https://cdn.iblockads.net/iblockads.net.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.apple.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/gambling.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.lgwebos.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/anti.piracy-onlydomains.txt
@@ -68,7 +64,16 @@ urls=(
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/multi.txt
-  
+  https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/multi-onlydomains.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/hoster.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt
+  https://raw.githubusercontent.com/ligyxy/Blocklist/master/BLOCKLIST
+  https://raw.githubusercontent.com/deathbybandaid/piholeparser/master/Subscribable-Lists/ParsedBlacklists/Mayvs-Private-Adblock-Filters.txt
+  https://raw.githubusercontent.com/PoorPocketsMcNewHold/steamscamsites/master/steamscamsite.txt
+  https://raw.githubusercontent.com/mtxadmin/ublock/master/hosts.txt
+  https://raw.githubusercontent.com/VeleSila/yhosts/master/hosts.txt
+  https://raw.githubusercontent.com/ZYX2019/host-block-list/master/Custom.txt
+ 
     )
 
 # loop through the urls and download each file with curl
