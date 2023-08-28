@@ -5,7 +5,7 @@ touch input.csv
 
 # declare an array of urls
 urls=(
-    https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_adblock.txt
+https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_adblock.txt
 https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_gambling.txt
 https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_privacy.txt
 https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts
@@ -73,7 +73,17 @@ https://raw.githubusercontent.com/ZYX2019/host-block-list/master/Custom.txt
 https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/xiaomi
 https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/apple
 https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/alexa
- 
+https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains
+https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/samsung
+https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/huawei
+https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/roku
+https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/sonos
+https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/windows
+https://raw.githubusercontent.com/nextdns/cname-cloaking-blocklist/master/domains
+https://raw.githubusercontent.com/nextdns/piracy-blocklists/master/torrent-trackers
+https://raw.githubusercontent.com/nextdns/piracy-blocklists/master/file-hosting
+
+   
     )
 
 # loop through the urls and download each file with curl
