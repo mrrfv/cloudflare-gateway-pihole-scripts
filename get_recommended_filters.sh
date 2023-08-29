@@ -36,6 +36,7 @@ urls=(
   https://raw.githubusercontent.com/gieljnssns/Social-media-Blocklists/master/adguard-facebook.txt
   https://raw.githubusercontent.com/gieljnssns/Social-media-Blocklists/master/pihole-facebook.txt
   https://raw.githubusercontent.com/gieljnssns/Social-media-Blocklists/master/adguard-netflix.txt
+  https://raw.githubusercontent.com/ethan-xd/ethan-xd.github.io/master/fb.txt
    
     )
 
