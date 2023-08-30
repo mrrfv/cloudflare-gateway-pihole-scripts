@@ -45,6 +45,7 @@ urls=(
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt
   https://raw.githubusercontent.com/nextdns/piracy-blocklists/master/file-hosting
   https://raw.githubusercontent.com/ZYX2019/host-block-list/master/Custom.txt
+  
 
 )
 
