@@ -36,8 +36,16 @@ urls=(
   https://raw.githubusercontent.com/gieljnssns/Social-media-Blocklists/master/adguard-facebook.txt
   https://raw.githubusercontent.com/gieljnssns/Social-media-Blocklists/master/pihole-facebook.txt
   https://raw.githubusercontent.com/gieljnssns/Social-media-Blocklists/master/adguard-netflix.txt
-  https://raw.githubusercontent.com/ethan-xd/ethan-xd.github.io/master/fb.txt
-  https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt 
+  https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/nosafesearch-onlydomains.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/anti.piracy-onlydomains.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt
+  https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/multi-onlydomains.txt
+  https://raw.githubusercontent.com/nextdns/piracy-blocklists/master/torrent-trackers
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt
+  https://raw.githubusercontent.com/nextdns/piracy-blocklists/master/file-hosting
+  https://raw.githubusercontent.com/ZYX2019/host-block-list/master/Custom.txt
     )
 
 # loop through the urls and download each file with curl
