@@ -41,7 +41,6 @@ urls=(
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/anti.piracy-onlydomains.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt
-  https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/multi-onlydomains.txt
   https://raw.githubusercontent.com/nextdns/piracy-blocklists/master/torrent-trackers
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt
   https://raw.githubusercontent.com/nextdns/piracy-blocklists/master/file-hosting
