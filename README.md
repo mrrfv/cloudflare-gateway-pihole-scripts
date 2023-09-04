@@ -82,7 +82,7 @@ Alternatively, you can install the Cloudflare WARP client and log in to Zero Tru
 
 ### Cloudflare Gateway?
 
-- Requires a valid credit card
+- Requires a valid credit card or PayPal account
 - Limit of 300k domains on the free plan
 
 ### a hosts file?
