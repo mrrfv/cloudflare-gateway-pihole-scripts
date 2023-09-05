@@ -1,7 +1,7 @@
 #!/bin/bash
 #  
-# Use the provided lists or add you own
-# https://oisd.nl/includedlists/whitelists
+# Use the provided lists or add your own.
+# There is no limit on the amount of whitelisted domains you can have.
 
 source $(dirname "$0")/helpers.sh
 
@@ -13,8 +13,6 @@ urls=(
     https://raw.githubusercontent.com/TogoFire-Home/AD-Settings/main/Filters/whitelist.txt
     https://raw.githubusercontent.com/freekers/whitelist/master/domains/whitelist.txt
     https://raw.githubusercontent.com/DandelionSprout/AdGuard-Home-Whitelist/master/whitelist.txt
-    # Commented out because it looks suspicious
-    # https://www.aadvantageeshopping.com/adBlockWhitelist.php
     https://raw.githubusercontent.com/AdguardTeam/AdGuardSDNSFilter/master/Filters/exclusions.txt
     https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt
     https://raw.githubusercontent.com/AdguardTeam/HttpsExclusions/master/exclusions/issues.txt
@@ -32,6 +30,8 @@ urls=(
     https://raw.githubusercontent.com/AdguardTeam/HttpsExclusions/master/exclusions/firefox.txt
     # Commented out because it whitelists sites including doubleclick.net and ad.atdmt.com
     # https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/referral-sites.txt
+    # Uncomment the line below to use OISD's most commmonly whitelisted list
+    # https://local.oisd.nl/extract/commonly_whitelisted.php
 
 )
 
