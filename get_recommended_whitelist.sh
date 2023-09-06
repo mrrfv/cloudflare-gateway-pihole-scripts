@@ -32,7 +32,7 @@ urls=(
     # https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/referral-sites.txt
     # Uncomment the line below to use OISD's most commmonly whitelisted list
     # https://local.oisd.nl/extract/commonly_whitelisted.php
-
+    https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains
 )
 
 # download all files in parallel and append them to whitelist.csv
