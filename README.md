@@ -69,6 +69,12 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 
 Alternatively, you can install the Cloudflare WARP client and log in to Zero Trust. This method proxies your traffic over Cloudflare servers, meaning it works similarly to a commercial VPN.
 
+### Dry runs
+
+To see if e.g. your filter lists are valid without actually changing anything in your Cloudflare account, you can set the `DRY_RUN` environment variable to "true", either in `.env` or the regular way. This will only print info such as the lists that would be created or the amount of duplicate domains to the console.
+
+**Warning:** This currently only works for `cf_list_create.js`.
+
 ## Why not...
 
 ### Pi-hole or Adguard Home?

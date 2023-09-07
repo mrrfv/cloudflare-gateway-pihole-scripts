@@ -109,6 +109,10 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
 
   if (!process.env.CI) console.log(`Found ${domains.length} valid domains in input.csv after cleanup - ${listsToCreate} list(s) will be created`);
 
+  // If we are dry-running, stop here because we don't want to create lists
+  // TODO: we should probably continue, just without making any real requests to Cloudflare
+  if (process.env.DRY_RUN) return console.log('Dry run complete - no lists were created. If this was not intended, please remove the DRY_RUN environment variable and try again.');
+
   // Separate domains into chunks of 1000 (Cloudflare list cap)
   const chunks = chunkArray(domains, 1000);
 
