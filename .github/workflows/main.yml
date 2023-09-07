@@ -1,10 +1,3 @@
-CLOUDFLARE_LIST_ITEM_LIMIT	Nếu dùng free plan thì nhập vào 300000
-3. Chạy workflow github:
-Vào đây
-J9IbKSO.png
-Paste toàn bộ nội dung này vào, rồi bấm Commit
-
-Code:
 name: Update Filter Lists
 
 on:
