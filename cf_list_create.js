@@ -101,8 +101,8 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
 
   // Trim array to 300,000 domains if it's longer than that
   if (domains.length > LIST_ITEM_LIMIT) {
+    console.warn(`${domains.length} domains found in input.csv - input has to be trimmed to ${LIST_ITEM_LIMIT} domains`);
     domains = trimArray(domains, LIST_ITEM_LIMIT);
-    console.warn(`More than ${LIST_ITEM_LIMIT} domains found in input.csv - input has to be trimmed`);
   }
 
   const listsToCreate = Math.ceil(domains.length / 1000);
