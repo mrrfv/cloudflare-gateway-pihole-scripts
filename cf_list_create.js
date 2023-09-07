@@ -74,6 +74,7 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   });
 
   // Check for duplicates in domains array
+  let duplicateDomainCount = 0;
   let uniqueDomains = [];
   let seen = new Set(); // Use a set to store seen values
   for (let domain of domains) {
@@ -81,9 +82,10 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
       seen.add(domain); // Add it to the set
       uniqueDomains.push(domain); // Push the domain to the uniqueDomains array
     } else { // If the domain is in the set
-      console.warn(`Duplicate domain found: ${domain} - removing`); // Log the duplicate domain
+      duplicateDomainCount++; // Increment the duplicateDomainCount
     }
   }
+  if (duplicateDomainCount > 0) console.warn(`Found ${duplicateDomainCount} duplicate domains in input.csv - removing`);
 
   // Replace domains array with uniqueDomains array
   domains = uniqueDomains;
