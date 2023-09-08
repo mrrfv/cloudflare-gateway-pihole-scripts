@@ -1,6 +1,6 @@
-require("dotenv").config();
-const fs = require('fs');
-const axios = require('axios');
+import 'dotenv/config';
+import fetch from 'node-fetch';
+import fs from 'fs';
 
 const API_TOKEN = process.env.CLOUDFLARE_API_KEY;
 const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
@@ -158,24 +158,26 @@ function chunkArray(array, chunkSize) {
 
 // Function to create a Cloudflare Zero Trust list
 async function createZeroTrustList(name, items, currentItem, totalItems) {
-  const response = await axios.post(
-    `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists`,
-    {
+  const url = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${API_TOKEN}`,
+      'Content-Type': 'application/json',
+      'X-Auth-Email': ACCOUNT_EMAIL,
+      'X-Auth-Key': API_TOKEN,
+    },
+    body: JSON.stringify({
       name,
       type: 'DOMAIN', // Set list type to DOMAIN
       items,
-    },
-    {
-      headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
-        'Content-Type': 'application/json',
-        'X-Auth-Email': ACCOUNT_EMAIL,
-        'X-Auth-Key': API_TOKEN,
-      },
-    }
-  );
+    }),
+  });
 
-  const listId = response.data.result.id;
+  const data = await response.json();
+  const listId = data.result.id;
+
   console.log(`Created Zero Trust list`, process.env.CI ? "(redacted on CI)" : `"${name}" with ID ${listId} - ${totalItems - currentItem} left`);
 }
 
