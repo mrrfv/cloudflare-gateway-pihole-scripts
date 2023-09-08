@@ -74,6 +74,7 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   });
 
   // Check for duplicates in domains array
+  let duplicateDomainCount = 0;
   let uniqueDomains = [];
   let seen = new Set(); // Use a set to store seen values
   for (let domain of domains) {
@@ -81,9 +82,10 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
       seen.add(domain); // Add it to the set
       uniqueDomains.push(domain); // Push the domain to the uniqueDomains array
     } else { // If the domain is in the set
-      console.warn(`Duplicate domain found: ${domain} - removing`); // Log the duplicate domain
+      duplicateDomainCount++; // Increment the duplicateDomainCount
     }
   }
+  if (duplicateDomainCount > 0) console.warn(`Found ${duplicateDomainCount} duplicate domains in input.csv - removing`);
 
   // Replace domains array with uniqueDomains array
   domains = uniqueDomains;
@@ -99,13 +101,17 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
 
   // Trim array to 300,000 domains if it's longer than that
   if (domains.length > LIST_ITEM_LIMIT) {
+    console.warn(`${domains.length} domains found in input.csv - input has to be trimmed to ${LIST_ITEM_LIMIT} domains`);
     domains = trimArray(domains, LIST_ITEM_LIMIT);
-    console.warn(`More than ${LIST_ITEM_LIMIT} domains found in input.csv - input has to be trimmed`);
   }
 
   const listsToCreate = Math.ceil(domains.length / 1000);
 
   if (!process.env.CI) console.log(`Found ${domains.length} valid domains in input.csv after cleanup - ${listsToCreate} list(s) will be created`);
+
+  // If we are dry-running, stop here because we don't want to create lists
+  // TODO: we should probably continue, just without making any real requests to Cloudflare
+  if (process.env.DRY_RUN) return console.log('Dry run complete - no lists were created. If this was not intended, please remove the DRY_RUN environment variable and try again.');
 
   // Separate domains into chunks of 1000 (Cloudflare list cap)
   const chunks = chunkArray(domains, 1000);
