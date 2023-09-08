@@ -1,5 +1,5 @@
-require("dotenv").config();
-const axios = require('axios');
+import 'dotenv/config';
+import fetch from 'node-fetch';
 
 const API_TOKEN = process.env.CLOUDFLARE_API_KEY;
 const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
@@ -7,19 +7,24 @@ const ACCOUNT_EMAIL = process.env.CLOUDFLARE_ACCOUNT_EMAIL;
 
 // Function to read Cloudflare Zero Trust rules
 async function getZeroTrustRules() {
-  const response = await axios.get(
-    `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/rules`,
-    {
-      headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
-        'Content-Type': 'application/json',
-        'X-Auth-Email': ACCOUNT_EMAIL,
-        'X-Auth-Key': API_TOKEN,
-      },
-    }
-  );
+  const url = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/rules`;
 
-  return response.data.result;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${API_TOKEN}`,
+      'Content-Type': 'application/json',
+      'X-Auth-Email': ACCOUNT_EMAIL,
+      'X-Auth-Key': API_TOKEN,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.result;
 }
 
 ;(async() => {
@@ -30,9 +35,10 @@ async function getZeroTrustRules() {
 
     console.log(`Deleting rule`, process.env.CI ? "(redacted, running in CI)" : `${filtered_rule.name} with ID ${filtered_rule.id}`);
 
-    const resp = await axios.request({
+    const url = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/rules/${filtered_rule.id}`;
+
+    const resp = await fetch(url, {
         method: 'DELETE',
-        url: `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/rules/${filtered_rule.id}`,
         headers: {
             'Authorization': `Bearer ${API_TOKEN}`,
             'Content-Type': 'application/json',
@@ -40,8 +46,10 @@ async function getZeroTrustRules() {
             'X-Auth-Key': API_TOKEN,
         },
     });
-
-    console.log('Success: ', resp.data.success);
+    
+    const data = await resp.json();
+    
+    console.log('Success: ', data.success);
     await sleep(350); // Cloudflare API rate limit is 1200 requests per 5 minutes, so we sleep for 350ms to be safe
 })();
 

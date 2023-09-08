@@ -1,5 +1,5 @@
-require("dotenv").config();
-const axios = require('axios');
+import 'dotenv/config';
+import fetch from 'node-fetch';
 
 const API_TOKEN = process.env.CLOUDFLARE_API_KEY;
 const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
@@ -7,19 +7,20 @@ const ACCOUNT_EMAIL = process.env.CLOUDFLARE_ACCOUNT_EMAIL;
 
 // Function to read Cloudflare Zero Trust lists
 async function getZeroTrustLists() {
-  const response = await axios.get(
-    `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists`,
-    {
-      headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
-        'Content-Type': 'application/json',
-        'X-Auth-Email': ACCOUNT_EMAIL,
-        'X-Auth-Key': API_TOKEN,
-      },
-    }
-  );
+  const url = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists`;
 
-  return response.data.result;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${API_TOKEN}`,
+      'Content-Type': 'application/json',
+      'X-Auth-Email': ACCOUNT_EMAIL,
+      'X-Auth-Key': API_TOKEN,
+    },
+  });
+
+  const data = await response.json();
+  return data.result;
 }
 
 ;(async() => {
@@ -30,21 +31,26 @@ async function getZeroTrustLists() {
 
     if (!process.env.CI) console.log(`Got ${lists.length} lists, ${cgps_lists.length} of which are CGPS lists that will be deleted.`);
 
+    let lists_processed = 0;
     for (const list of cgps_lists) {
-        console.log(`Deleting list`, process.env.CI ? "(redacted, running in CI)" : `${list.name} with ID ${list.id}`);
-        const resp = await axios.request({
+        console.log(`Deleting list`, process.env.CI ? "(info redacted, running in CI)" : `${list.name} with ID ${list.id}, ${cgps_lists.length - lists_processed - 1} left`);
+        
+        const resp = await fetch(`https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists/${list.id}`, {
             method: 'DELETE',
-            url: `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists/${list.id}`,
             headers: {
                 'Authorization': `Bearer ${API_TOKEN}`,
                 'Content-Type': 'application/json',
                 'X-Auth-Email': ACCOUNT_EMAIL,
                 'X-Auth-Key': API_TOKEN,
-              },
+            },
         });
-        console.log('Success:', resp.data.success);
+    
+        const data = await resp.json();
+        console.log('Success:', data.success);
+        lists_processed++;
+        
         await sleep(350); // Cloudflare API rate limit is 1200 requests per 5 minutes, so we sleep for 350ms to be safe
-    }
+    }    
 })();
 
 async function sleep(ms) {

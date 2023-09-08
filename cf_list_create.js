@@ -1,6 +1,6 @@
-require("dotenv").config();
-const fs = require('fs');
-const axios = require('axios');
+import 'dotenv/config';
+import fetch from 'node-fetch';
+import fs from 'fs';
 
 const API_TOKEN = process.env.CLOUDFLARE_API_KEY;
 const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
@@ -91,13 +91,15 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   domains = uniqueDomains;
 
   // Remove domains from the domains array that are present in the whitelist array
+  let whitelistedDomainCount = 0;
   domains = domains.filter(domain => {
     if (whitelist.includes(domain)) {
-      console.warn(`Domain found in the whitelist: ${domain} - removing`);
+      whitelistedDomainCount++;
       return false;
     }
     return true;
   });
+  if (whitelistedDomainCount > 0) console.warn(`Found ${whitelistedDomainCount} domains in input.csv that are present in the whitelist - removing them`);
 
   // Trim array to 300,000 domains if it's longer than that
   if (domains.length > LIST_ITEM_LIMIT) {
@@ -156,24 +158,26 @@ function chunkArray(array, chunkSize) {
 
 // Function to create a Cloudflare Zero Trust list
 async function createZeroTrustList(name, items, currentItem, totalItems) {
-  const response = await axios.post(
-    `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists`,
-    {
+  const url = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${API_TOKEN}`,
+      'Content-Type': 'application/json',
+      'X-Auth-Email': ACCOUNT_EMAIL,
+      'X-Auth-Key': API_TOKEN,
+    },
+    body: JSON.stringify({
       name,
       type: 'DOMAIN', // Set list type to DOMAIN
       items,
-    },
-    {
-      headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
-        'Content-Type': 'application/json',
-        'X-Auth-Email': ACCOUNT_EMAIL,
-        'X-Auth-Key': API_TOKEN,
-      },
-    }
-  );
+    }),
+  });
 
-  const listId = response.data.result.id;
+  const data = await response.json();
+  const listId = data.result.id;
+
   console.log(`Created Zero Trust list`, process.env.CI ? "(redacted on CI)" : `"${name}" with ID ${listId} - ${totalItems - currentItem} left`);
 }
 
