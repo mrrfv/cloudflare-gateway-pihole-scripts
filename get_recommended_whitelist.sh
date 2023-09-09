@@ -3,7 +3,7 @@
 # Use the provided lists or add your own.
 # There is no limit on the amount of whitelisted domains you can have.
 
-source $(dirname "$0")/helpers.sh
+source "$(dirname "$0")/helpers.sh"
 
 # declare an array of urls
 urls=(
