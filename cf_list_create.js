@@ -112,9 +112,9 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   if (DRY_RUN) return console.log('Dry run complete - no lists were created. If this was not intended, please remove the DRY_RUN environment variable and try again.');
 
   if (FAST_MODE) {
-    createZeroTrustListsAtOnce(items);
+    createZeroTrustListsAtOnce(domains);
     return;
   }
 
-  createZeroTrustListsOneByOne(items);
+  createZeroTrustListsOneByOne(domains);
 });
