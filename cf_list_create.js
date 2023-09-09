@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { DRY_RUN, LIST_ITEM_LIMIT } from './lib/constants.js';
-import { createZeroTrustLists } from './lib/helpers.js';
+import { createZeroTrustLists } from './lib/api.js';
 
 if (!process.env.CI) console.log(`List item limit set to ${LIST_ITEM_LIMIT}`);
 
