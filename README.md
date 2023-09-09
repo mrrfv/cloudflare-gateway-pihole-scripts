@@ -73,7 +73,7 @@ Alternatively, you can install the Cloudflare WARP client and log in to Zero Tru
 
 ### Dry runs
 
-To see if e.g. your filter lists are valid without actually changing anything in your Cloudflare account, you can set the `DRY_RUN` environment variable to "true" or any value other than empty, either in `.env` or the regular way. This will only print info such as the lists that would be created or the amount of duplicate domains to the console.
+To see if e.g. your filter lists are valid without actually changing anything in your Cloudflare account, you can set the `DRY_RUN` environment variable to 1, either in `.env` or the regular way. This will only print info such as the lists that would be created or the amount of duplicate domains to the console.
 
 **Warning:** This currently only works for `cf_list_create.js`.
 
