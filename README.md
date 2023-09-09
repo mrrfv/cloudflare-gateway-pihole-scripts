@@ -20,7 +20,6 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 - Whitelist support, allowing you to prevent false positives and breakage by forcing trusted domains to always be unblocked.
 - Optional health check: Sends a ping request ensuring continuous monitoring and alerting for the workflow execution.
 
-
 ## Usage
 
 ### Prerequisites
@@ -57,7 +56,6 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 - `CLOUDFLARE_LIST_ITEM_LIMIT`: The maximum number of blocked domains allowed for your Cloudflare Zero Trust plan. Use 300000 for the free plan or if you're unsure.
 - `PING_URL`: /Optional/ The HTTP(S) URL to ping (using curl) after the GitHub Action has successfully updated your filters. Useful for monitoring.
 
-
 3. Create a new file in the repository named `.github/workflows/main.yml` with the contents of `auto_update_github_action.yml` found in this repository. The default settings will update your filters every week at 3 AM UTC. You can change this by editing the `schedule` property.
 4. Enable GitHub Actions in your repository settings.
 
@@ -68,6 +66,12 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 3. Configure your router or device based on the provided DNS addresses.
 
 Alternatively, you can install the Cloudflare WARP client and log in to Zero Trust. This method proxies your traffic over Cloudflare servers, meaning it works similarly to a commercial VPN.
+
+### Dry runs
+
+To see if e.g. your filter lists are valid without actually changing anything in your Cloudflare account, you can set the `DRY_RUN` environment variable to "true" or any value other than empty, either in `.env` or the regular way. This will only print info such as the lists that would be created or the amount of duplicate domains to the console.
+
+**Warning:** This currently only works for `cf_list_create.js`.
 
 ## Why not...
 
