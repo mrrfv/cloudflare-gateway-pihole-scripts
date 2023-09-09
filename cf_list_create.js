@@ -1,6 +1,7 @@
 import fs from 'fs';
-import { DRY_RUN, LIST_ITEM_LIMIT } from './lib/constants.js';
-import { createZeroTrustLists } from './lib/api.js';
+import { DRY_RUN, FAST_MODE, LIST_ITEM_LIMIT } from './lib/constants.js';
+import { createZeroTrustListsAtOnce, createZeroTrustListsOneByOne } from './lib/api.js';
+import { truncateArray } from './lib/utils.js';
 
 if (!process.env.CI) console.log(`List item limit set to ${LIST_ITEM_LIMIT}`);
 
@@ -99,7 +100,7 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   // Trim array to 300,000 domains if it's longer than that
   if (domains.length > LIST_ITEM_LIMIT) {
     console.warn(`${domains.length} domains found in input.csv - input has to be trimmed to ${LIST_ITEM_LIMIT} domains`);
-    domains = trimArray(domains, LIST_ITEM_LIMIT);
+    domains = truncateArray(domains, LIST_ITEM_LIMIT);
   }
 
   const listsToCreate = Math.ceil(domains.length / 1000);
@@ -110,9 +111,10 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   // TODO: we should probably continue, just without making any real requests to Cloudflare
   if (DRY_RUN) return console.log('Dry run complete - no lists were created. If this was not intended, please remove the DRY_RUN environment variable and try again.');
 
-  await createZeroTrustLists(domains)
-});
+  if (FAST_MODE) {
+    createZeroTrustListsAtOnce(items);
+    return;
+  }
 
-function trimArray(arr, size) {
-  return arr.slice(0, size);
-}
+  createZeroTrustListsOneByOne(items);
+});
