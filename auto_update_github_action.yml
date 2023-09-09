@@ -8,6 +8,14 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+  CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+  CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
+  PING_URL: ${{ secrets.PING_URL }}
+  FAST_MODE: ${{ vars.FAST_MODE }}
+
 jobs:
   cgps:
     runs-on: ubuntu-latest
@@ -36,25 +44,13 @@ jobs:
         run: |
           node cf_gateway_rule_delete.js
           node cf_list_delete.js
-        env:
-          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-          CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
 
       - name: Create new rules and lists
         run: |
           node cf_list_create.js
           node cf_gateway_rule_create.js
-        env:
-          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-          CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
 
       - name: Send ping request
         if: env.PING_URL != ''
-        env:
-          PING_URL: ${{ secrets.PING_URL }}
         run: |
           curl "${{ env.PING_URL }}"
