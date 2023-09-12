@@ -56,8 +56,12 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 - `CLOUDFLARE_LIST_ITEM_LIMIT`: The maximum number of blocked domains allowed for your Cloudflare Zero Trust plan. Use 300000 for the free plan or if you're unsure.
 - `PING_URL`: /Optional/ The HTTP(S) URL to ping (using curl) after the GitHub Action has successfully updated your filters. Useful for monitoring.
 
-3. Create a new file in the repository named `.github/workflows/main.yml` with the contents of `auto_update_github_action.yml` found in this repository. The default settings will update your filters every week at 3 AM UTC. You can change this by editing the `schedule` property.
-4. Enable GitHub Actions in your repository settings.
+3. Create the following GitHub Actions variables in your repository settings if you desire:
+
+- `FAST_MODE`: Enable the scripts to send the requests simultaneously. Beware that there's a rate limit of 1200 requests per five minutes (https://developers.cloudflare.com/fundamentals/api/reference/limits/) so make sure you know what you are doing.
+
+4. Create a new file in the repository named `.github/workflows/main.yml` with the contents of `auto_update_github_action.yml` found in this repository. The default settings will update your filters every week at 3 AM UTC. You can change this by editing the `schedule` property.
+5. Enable GitHub Actions in your repository settings.
 
 ### DNS setup for Cloudflare Gateway
 
@@ -69,7 +73,7 @@ Alternatively, you can install the Cloudflare WARP client and log in to Zero Tru
 
 ### Dry runs
 
-To see if e.g. your filter lists are valid without actually changing anything in your Cloudflare account, you can set the `DRY_RUN` environment variable to "true" or any value other than empty, either in `.env` or the regular way. This will only print info such as the lists that would be created or the amount of duplicate domains to the console.
+To see if e.g. your filter lists are valid without actually changing anything in your Cloudflare account, you can set the `DRY_RUN` environment variable to 1, either in `.env` or the regular way. This will only print info such as the lists that would be created or the amount of duplicate domains to the console.
 
 **Warning:** This currently only works for `cf_list_create.js`.
 

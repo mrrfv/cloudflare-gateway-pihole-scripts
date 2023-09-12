@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$(dirname "$0")/helpers.sh"
+source $(dirname "$0")/lib/helpers.sh
 
 # declare an array of urls
 urls=(

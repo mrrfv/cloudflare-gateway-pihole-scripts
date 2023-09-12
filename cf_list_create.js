@@ -1,11 +1,7 @@
-import 'dotenv/config';
-import fetch from 'node-fetch';
 import fs from 'fs';
-
-const API_TOKEN = process.env.CLOUDFLARE_API_KEY;
-const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
-const ACCOUNT_EMAIL = process.env.CLOUDFLARE_ACCOUNT_EMAIL;
-const LIST_ITEM_LIMIT = Number.isSafeInteger(Number(process.env.CLOUDFLARE_LIST_ITEM_LIMIT)) ? Number(process.env.CLOUDFLARE_LIST_ITEM_LIMIT) : 300000;
+import { DRY_RUN, FAST_MODE, LIST_ITEM_LIMIT } from './lib/constants.js';
+import { createZeroTrustListsAtOnce, createZeroTrustListsOneByOne } from './lib/api.js';
+import { truncateArray } from './lib/utils.js';
 
 if (!process.env.CI) console.log(`List item limit set to ${LIST_ITEM_LIMIT}`);
 
@@ -104,7 +100,7 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
   // Trim array to 300,000 domains if it's longer than that
   if (domains.length > LIST_ITEM_LIMIT) {
     console.warn(`${domains.length} domains found in input.csv - input has to be trimmed to ${LIST_ITEM_LIMIT} domains`);
-    domains = trimArray(domains, LIST_ITEM_LIMIT);
+    domains = truncateArray(domains, LIST_ITEM_LIMIT);
   }
 
   const listsToCreate = Math.ceil(domains.length / 1000);
@@ -113,79 +109,12 @@ fs.readFile('input.csv', 'utf8', async (err, data) => {
 
   // If we are dry-running, stop here because we don't want to create lists
   // TODO: we should probably continue, just without making any real requests to Cloudflare
-  if (process.env.DRY_RUN) return console.log('Dry run complete - no lists were created. If this was not intended, please remove the DRY_RUN environment variable and try again.');
+  if (DRY_RUN) return console.log('Dry run complete - no lists were created. If this was not intended, please remove the DRY_RUN environment variable and try again.');
 
-  // Separate domains into chunks of 1000 (Cloudflare list cap)
-  const chunks = chunkArray(domains, 1000);
-
-  // Create Cloudflare Zero Trust lists
-  for (const [index, chunk] of chunks.entries()) {
-    const listName = `CGPS List - Chunk ${index}`;
-
-    let properList = [];
-
-    chunk.forEach(domain => {
-        properList.push({ "value": domain })
-    });
-
-    try {
-      await createZeroTrustList(listName, properList, (index+1), listsToCreate);
-      await sleep(350); // Sleep for 350ms between list additions
-    } catch (error) {
-      console.error(`Error creating list `, process.env.CI ? "(redacted on CI)" :  `"${listName}": ${error.response.data}`);
-    }
+  if (FAST_MODE) {
+    await createZeroTrustListsAtOnce(domains);
+    return;
   }
+
+  await createZeroTrustListsOneByOne(domains);
 });
-
-function trimArray(arr, size) {
-  return arr.slice(0, size);
-}
-
-// Function to check if a domain is valid
-function isValidDomain(domain) {
-    const regex = /^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$/;
-    return regex.test(domain);
-}
-
-// Function to split an array into chunks
-function chunkArray(array, chunkSize) {
-  const chunks = [];
-  for (let i = 0; i < array.length; i += chunkSize) {
-    chunks.push(array.slice(i, i + chunkSize));
-  }
-  return chunks;
-}
-
-// Function to create a Cloudflare Zero Trust list
-async function createZeroTrustList(name, items, currentItem, totalItems) {
-  const url = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists`;
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
-      'Content-Type': 'application/json',
-      'X-Auth-Email': ACCOUNT_EMAIL,
-      'X-Auth-Key': API_TOKEN,
-    },
-    body: JSON.stringify({
-      name,
-      type: 'DOMAIN', // Set list type to DOMAIN
-      items,
-    }),
-  });
-
-  const data = await response.json();
-  const listId = data.result.id;
-
-  console.log(`Created Zero Trust list`, process.env.CI ? "(redacted on CI)" : `"${name}" with ID ${listId} - ${totalItems - currentItem} left`);
-}
-
-function percentage(percent, total) {
-  return Math.round((percent / 100) * total);
-}
-
-// Function to sleep for a specified duration
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
