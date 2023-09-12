@@ -24,9 +24,13 @@ let duplicateDomainCount = 0;
 // Read allowlist
 console.log(`Processing ${allowlistFilename}`);
 await readFile(resolve(allowlistFilename), (line) => {
-  if (isComment(line)) return;
+  const _line = line.trim();
 
-  const domain = normalizeDomain(line, true);
+  if (!_line) return;
+
+  if (isComment(_line)) return;
+
+  const domain = normalizeDomain(_line, true);
 
   if (!isValidDomain(domain)) return;
 
@@ -40,9 +44,13 @@ await readFile(resolve(blocklistFilename), (line, rl) => {
     return;
   }
 
-  if (isComment(line)) return;
+  const _line = line.trim();
 
-  const domain = normalizeDomain(line);
+  if (!_line) return;
+
+  if (isComment(_line)) return;
+
+  const domain = normalizeDomain(_line);
 
   if (!isValidDomain(domain)) return;
 
