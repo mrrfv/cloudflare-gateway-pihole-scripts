@@ -20,6 +20,7 @@ const blocklist = new Map();
 const domains = [];
 let processedDomainCount = 0;
 let duplicateDomainCount = 0;
+let allowedDomainCount = 0;
 
 // Read allowlist
 console.log(`Processing ${allowlistFilename}`);
@@ -64,6 +65,7 @@ await readFile(resolve(blocklistFilename), (line, rl) => {
 
   if (allowlist.has(domain)) {
     console.log(`Found ${domain} in allowlist - Skipping...`);
+    allowedDomainCount++;
     return;
   }
 
@@ -81,7 +83,7 @@ await readFile(resolve(blocklistFilename), (line, rl) => {
 console.log("\n\n");
 console.log(`Number of processed domains: ${processedDomainCount}`);
 console.log(`Number of blocked domains: ${domains.length}`);
-console.log(`Number of allowed domains: ${allowlist.size}`);
+console.log(`Number of allowed domains: ${allowedDomainCount}`);
 console.log(`Number of duplicate domains: ${duplicateDomainCount}`);
 console.log(
   `Number of lists which will be created: ${Math.ceil(
