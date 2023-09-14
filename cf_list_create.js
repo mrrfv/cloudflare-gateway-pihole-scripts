@@ -11,7 +11,12 @@ import {
   LIST_ITEM_SIZE,
 } from "./lib/constants.js";
 import { normalizeDomain } from "./lib/helpers.js";
-import { isComment, isValidDomain, readFile } from "./lib/utils.js";
+import {
+  extractDomain,
+  isComment,
+  isValidDomain,
+  readFile,
+} from "./lib/utils.js";
 
 const allowlistFilename = "whitelist.csv";
 const blocklistFilename = "input.csv";
@@ -19,6 +24,7 @@ const allowlist = new Map();
 const blocklist = new Map();
 const domains = [];
 let processedDomainCount = 0;
+let unnecessaryDomainCount = 0;
 let duplicateDomainCount = 0;
 let allowedDomainCount = 0;
 
@@ -57,14 +63,30 @@ await readFile(resolve(blocklistFilename), (line, rl) => {
 
   processedDomainCount++;
 
-  if (blocklist.has(domain)) {
-    console.log(`Found ${domain} in blocklist already - Skipping...`);
-    duplicateDomainCount++;
-    return;
-  }
+  const anyDomainExists = extractDomain(domain)
+    .reverse()
+    .some((item) => {
+      if (blocklist.has(item)) {
+        if (item === domain) {
+          console.log(`Found ${item} in blocklist already - Skipping`);
+          duplicateDomainCount++;
+        } else {
+          console.log(
+            `Found ${item} in blocklist already - Skipping ${domain}`
+          );
+          unnecessaryDomainCount++;
+        }
+
+        return true;
+      }
+
+      return false;
+    });
+
+  if (anyDomainExists) return;
 
   if (allowlist.has(domain)) {
-    console.log(`Found ${domain} in allowlist - Skipping...`);
+    console.log(`Found ${domain} in allowlist - Skipping`);
     allowedDomainCount++;
     return;
   }
@@ -82,9 +104,10 @@ await readFile(resolve(blocklistFilename), (line, rl) => {
 
 console.log("\n\n");
 console.log(`Number of processed domains: ${processedDomainCount}`);
+console.log(`Number of duplicate domains: ${duplicateDomainCount}`);
+console.log(`Number of unnecessary domains: ${unnecessaryDomainCount}`);
 console.log(`Number of blocked domains: ${domains.length}`);
 console.log(`Number of allowed domains: ${allowedDomainCount}`);
-console.log(`Number of duplicate domains: ${duplicateDomainCount}`);
 console.log(
   `Number of lists which will be created: ${Math.ceil(
     domains.length / LIST_ITEM_SIZE
