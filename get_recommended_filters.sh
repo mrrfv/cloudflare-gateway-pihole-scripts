@@ -4,10 +4,12 @@ source $(dirname "$0")/lib/helpers.sh
 
 # declare an array of urls
 urls=(
+  https://abpvn.com/android/abpvn.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/light-onlydomains.txt
   https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_gambling.txt
   https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_privacy.txt
-  https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/domain.txt
-  https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
+  https://raw.githubusercontent.com/Yhonay/antipopads/master/hosts
+  https://malware-filter.gitlab.io/malware-filter/vn-badsite-filter-hosts.txt
 )
 
 # download all files in parallel and append them to input.csv
