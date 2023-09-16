@@ -10,6 +10,8 @@ urls=(
   https://raw.githubusercontent.com/mullvad/dns-blocklists/main/output/doh/doh_privacy.txt
   https://raw.githubusercontent.com/Yhonay/antipopads/master/hosts
   https://malware-filter.gitlab.io/malware-filter/vn-badsite-filter-hosts.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh-vpn-proxy-bypass.txt
+  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/dyndns.txt
 )
 
 # download all files in parallel and append them to input.csv
