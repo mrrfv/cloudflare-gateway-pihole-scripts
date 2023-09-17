@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 import { resolve } from "path";
 
 import {
@@ -18,8 +19,12 @@ import {
   readFile,
 } from "./lib/utils.js";
 
-const allowlistFilename = "allowlist.txt";
-const blocklistFilename = "blocklist.txt";
+const allowlistFilename = existsSync("whitelist.csv")
+  ? "whitelist.csv"
+  : "allowlist.txt";
+const blocklistFilename = existsSync("input.csv")
+  ? "input.csv"
+  : "blocklist.txt";
 const allowlist = new Map();
 const blocklist = new Map();
 const domains = [];

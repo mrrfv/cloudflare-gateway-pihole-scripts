@@ -9,6 +9,8 @@ lerna-debug.log*
 
 # CGPS
 output
+input.csv
+whitelist.csv
 blocklist.txt
 allowlist.txt
 
