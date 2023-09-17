@@ -33,8 +33,8 @@ urls=(
 
 )
 
-# download all files in parallel and append them to whitelist.csv
-node download_files.js allowlist.txt ${urls[@]}
+# download all files in parallel and append them to allowlist.txt
+node download_lists.js allowlist.txt ${urls[@]}
 
 # print a message when done
 echo "Done. The allowlist.txt file contains merged data from recommended whitelists."

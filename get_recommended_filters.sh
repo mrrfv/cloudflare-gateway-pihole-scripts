@@ -10,8 +10,8 @@ urls=(
   https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 )
 
-# download all files in parallel and append them to input.csv
-node download_files.js blocklist.txt ${urls[@]}
+# download all files in parallel and append them to blocklist.txt
+node download_lists.js blocklist.txt ${urls[@]}
 
 # print a message when done
 echo "Done. The blocklist.txt file contains merged data from recommended filter lists."
