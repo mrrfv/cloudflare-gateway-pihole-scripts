@@ -8,6 +8,9 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  NODE_ENV: production
+
 jobs:
   cgps:
     runs-on: ubuntu-latest
