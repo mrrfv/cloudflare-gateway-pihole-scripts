@@ -55,22 +55,32 @@ await readFile(resolve(blocklistFilename), (line, rl) => {
 
   if (!_line) return;
 
+  // Check if the current line is a comment in any format
   if (isComment(_line)) return;
 
+  // Remove prefixes and suffixes in hosts, wildcard or adblock format
   const domain = normalizeDomain(_line);
 
+  // Check if it is a valid domain which is not a URL or does not contain
+  // characters like * in the middle of the domain
   if (!isValidDomain(domain)) return;
 
   processedDomainCount++;
 
+  // Get all the levels of the domain and check from the highest
+  // because we are blocking all subdomains
+  // Example: fourth.third.example.com => ["example.com", "third.example.com", "fourth.third.example.com"]
   const anyDomainExists = extractDomain(domain)
     .reverse()
     .some((item) => {
       if (blocklist.has(item)) {
         if (item === domain) {
+          // The exact domain is already blocked
           console.log(`Found ${item} in blocklist already - Skipping`);
           duplicateDomainCount++;
         } else {
+          // The higher-level domain is already blocked
+          // so it's not necessary to block this domain
           console.log(
             `Found ${item} in blocklist already - Skipping ${domain}`
           );
