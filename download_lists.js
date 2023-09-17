@@ -39,20 +39,29 @@ const blocklistUrls = [
 ];
 const listType = process.argv[2];
 
+const downloadAllowlists = async () => {
+  await downloadFiles(resolve("./allowlist.txt"), allowlistUrls);
+  console.log(
+    "Done. The allowlist.txt file contains merged data from recommended whitelists."
+  );
+};
+
+const downloadBlocklists = async () => {
+  await downloadFiles(resolve("./blocklist.txt"), blocklistUrls);
+  console.log(
+    "Done. The blocklist.txt file contains merged data from recommended filter lists."
+  );
+};
+
 switch (listType) {
   case "allowlist": {
-    await downloadFiles(resolve("./allowlist.txt"), allowlistUrls);
-    console.log(
-      "Done. The allowlist.txt file contains merged data from recommended whitelists."
-    );
+    await downloadAllowlists();
     break;
   }
   case "blocklist": {
-    await downloadFiles(resolve("./blocklist.txt"), blocklistUrls);
-    console.log(
-      "Done. The blocklist.txt file contains merged data from recommended filter lists."
-    );
+    await downloadBlocklists();
     break;
   }
   default:
+    await Promise.all([downloadAllowlists(), downloadBlocklists()]);
 }
