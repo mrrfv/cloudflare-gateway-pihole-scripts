@@ -36,7 +36,7 @@ let allowedDomainCount = 0;
 
 // Read allowlist
 console.log(`Processing ${allowlistFilename}`);
-await readFile(resolve(allowlistFilename), (line) => {
+await readFile(resolve(`./${allowlistFilename}`), (line) => {
   const _line = line.trim();
 
   if (!_line) return;
@@ -52,7 +52,7 @@ await readFile(resolve(allowlistFilename), (line) => {
 
 // Read blocklist
 console.log(`Processing ${blocklistFilename}`);
-await readFile(resolve(blocklistFilename), (line, rl) => {
+await readFile(resolve(`./${blocklistFilename}`), (line, rl) => {
   if (domains.length === LIST_ITEM_LIMIT) {
     return;
   }
