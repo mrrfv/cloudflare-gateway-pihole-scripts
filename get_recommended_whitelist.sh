@@ -1,9 +1,7 @@
 #!/bin/bash
-#  
+#
 # Use the provided lists or add your own.
 # There is no limit on the amount of whitelisted domains you can have.
-
-source $(dirname "$0")/lib/helpers.sh
 
 # declare an array of urls
 urls=(
@@ -36,7 +34,7 @@ urls=(
 )
 
 # download all files in parallel and append them to whitelist.csv
-download_lists $urls 'whitelist.csv'
+node download_files.js allowlist.txt ${urls[@]}
 
 # print a message when done
-echo "Done. The whitelist.csv file contains merged data from recommended whitelists."
+echo "Done. The allowlist.txt file contains merged data from recommended whitelists."

@@ -18,8 +18,8 @@ import {
   readFile,
 } from "./lib/utils.js";
 
-const allowlistFilename = "whitelist.csv";
-const blocklistFilename = "input.csv";
+const allowlistFilename = "allowlist.txt";
+const blocklistFilename = "blocklist.txt";
 const allowlist = new Map();
 const blocklist = new Map();
 const domains = [];
