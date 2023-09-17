@@ -1,5 +1,6 @@
 import { resolve } from "path";
 
+import { LIST_TYPE, PROCESSING_FILENAME } from "./lib/constants.js";
 import { downloadFiles } from "./lib/utils.js";
 
 const allowlistUrls = [
@@ -40,25 +41,31 @@ const blocklistUrls = [
 const listType = process.argv[2];
 
 const downloadAllowlists = async () => {
-  await downloadFiles(resolve("./allowlist.txt"), allowlistUrls);
+  await downloadFiles(
+    resolve(`./${PROCESSING_FILENAME.ALLOWLIST}`),
+    allowlistUrls
+  );
   console.log(
-    "Done. The allowlist.txt file contains merged data from recommended whitelists."
+    `Done. The ${PROCESSING_FILENAME.ALLOWLIST} file contains merged data from recommended allowlists.`
   );
 };
 
 const downloadBlocklists = async () => {
-  await downloadFiles(resolve("./blocklist.txt"), blocklistUrls);
+  await downloadFiles(
+    resolve(`./${PROCESSING_FILENAME.BLOCKLIST}`),
+    blocklistUrls
+  );
   console.log(
-    "Done. The blocklist.txt file contains merged data from recommended filter lists."
+    `Done. The ${PROCESSING_FILENAME.BLOCKLIST} file contains merged data from recommended blocklists.`
   );
 };
 
 switch (listType) {
-  case "allowlist": {
+  case LIST_TYPE.ALLOWLIST: {
     await downloadAllowlists();
     break;
   }
-  case "blocklist": {
+  case LIST_TYPE.BLOCKLIST: {
     await downloadBlocklists();
     break;
   }

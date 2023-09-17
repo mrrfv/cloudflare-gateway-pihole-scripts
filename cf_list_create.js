@@ -10,6 +10,7 @@ import {
   FAST_MODE,
   LIST_ITEM_LIMIT,
   LIST_ITEM_SIZE,
+  PROCESSING_FILENAME,
 } from "./lib/constants.js";
 import { normalizeDomain } from "./lib/helpers.js";
 import {
@@ -19,12 +20,12 @@ import {
   readFile,
 } from "./lib/utils.js";
 
-const allowlistFilename = existsSync("whitelist.csv")
-  ? "whitelist.csv"
-  : "allowlist.txt";
-const blocklistFilename = existsSync("input.csv")
-  ? "input.csv"
-  : "blocklist.txt";
+const allowlistFilename = existsSync(PROCESSING_FILENAME.OLD_ALLOWLIST)
+  ? PROCESSING_FILENAME.OLD_ALLOWLIST
+  : PROCESSING_FILENAME.ALLOWLIST;
+const blocklistFilename = existsSync(PROCESSING_FILENAME.OLD_BLOCKLIST)
+  ? PROCESSING_FILENAME.OLD_BLOCKLIST
+  : PROCESSING_FILENAME.BLOCKLIST;
 const allowlist = new Map();
 const blocklist = new Map();
 const domains = [];
