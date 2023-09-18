@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 import { resolve } from "path";
 
 import {
@@ -9,6 +10,7 @@ import {
   FAST_MODE,
   LIST_ITEM_LIMIT,
   LIST_ITEM_SIZE,
+  PROCESSING_FILENAME,
 } from "./lib/constants.js";
 import { normalizeDomain } from "./lib/helpers.js";
 import {
@@ -18,8 +20,12 @@ import {
   readFile,
 } from "./lib/utils.js";
 
-const allowlistFilename = "whitelist.csv";
-const blocklistFilename = "input.csv";
+const allowlistFilename = existsSync(PROCESSING_FILENAME.OLD_ALLOWLIST)
+  ? PROCESSING_FILENAME.OLD_ALLOWLIST
+  : PROCESSING_FILENAME.ALLOWLIST;
+const blocklistFilename = existsSync(PROCESSING_FILENAME.OLD_BLOCKLIST)
+  ? PROCESSING_FILENAME.OLD_BLOCKLIST
+  : PROCESSING_FILENAME.BLOCKLIST;
 const allowlist = new Map();
 const blocklist = new Map();
 const domains = [];
@@ -30,7 +36,7 @@ let allowedDomainCount = 0;
 
 // Read allowlist
 console.log(`Processing ${allowlistFilename}`);
-await readFile(resolve(allowlistFilename), (line) => {
+await readFile(resolve(`./${allowlistFilename}`), (line) => {
   const _line = line.trim();
 
   if (!_line) return;
@@ -46,7 +52,7 @@ await readFile(resolve(allowlistFilename), (line) => {
 
 // Read blocklist
 console.log(`Processing ${blocklistFilename}`);
-await readFile(resolve(blocklistFilename), (line, rl) => {
+await readFile(resolve(`./${blocklistFilename}`), (line, rl) => {
   if (domains.length === LIST_ITEM_LIMIT) {
     return;
   }
