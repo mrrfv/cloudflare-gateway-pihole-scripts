@@ -35,9 +35,13 @@ jobs:
 
       - name: Download recommended whitelist
         run: bash ./get_recommended_whitelist.sh
+        env:
+          ALLOWLIST_URLS: ${{ vars.ALLOWLIST_URLS }}
 
       - name: Download recommended filters
         run: bash ./get_recommended_filters.sh
+        env:
+          BLOCKLIST_URLS: ${{ vars.BLOCKLIST_URLS }}
 
       - name: Delete old rules and lists
         run: |
