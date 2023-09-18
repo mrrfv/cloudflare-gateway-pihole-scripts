@@ -17,7 +17,13 @@ const listType = process.argv[2];
 const downloadLists = async (filename, urls) => {
   await downloadFiles(resolve(`./${filename}`), urls);
   console.log(
-    `Done. The ${filename} file contains merged data from ${urls.length} list(s).`
+    `Done. The ${filename} file contains merged data from the following list(s):`
+  );
+  console.log(
+    urls.reduce(
+      (previous, current, index) => previous + `${index + 1}. ${current}\n`,
+      ""
+    )
   );
 };
 
