@@ -1,0 +1,73 @@
+name: Update Filter Lists
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_ENV: production
+
+jobs:
+  cgps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: "mrrfv/cloudflare-gateway-pihole-scripts"
+          ref: "v1"
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Download recommended whitelist
+        run: bash ./get_recommended_whitelist.sh
+        env:
+          ALLOWLIST_URLS: ${{ vars.ALLOWLIST_URLS }}
+
+      - name: Download recommended filters
+        run: bash ./get_recommended_filters.sh
+        env:
+          BLOCKLIST_URLS: ${{ vars.BLOCKLIST_URLS }}
+
+      - name: Delete old rules and lists
+        run: |
+          node cf_gateway_rule_delete.js
+          node cf_list_delete.js
+        env:
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
+          FAST_MODE: ${{ vars.FAST_MODE }}
+
+      - name: Create new rules and lists
+        run: |
+          node cf_list_create.js
+          node cf_gateway_rule_create.js
+        env:
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
+          FAST_MODE: ${{ vars.FAST_MODE }}
+
+      - name: Send ping request
+        if: env.PING_URL != ''
+        run: |
+          curl "${{ env.PING_URL }}"
+        env:
+          PING_URL: ${{ secrets.PING_URL }}
