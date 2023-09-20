@@ -19,7 +19,6 @@ urls=(
   https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/ChineseFilter/sections/adservers_firstparty.txt
   https://gitlab.com/kowith337/PersonalFilterListCollection/raw/master/hosts/hosts_google_hotword.txt
   https://hostfiles.frogeye.fr/firstparty-only-trackers.txt
-  https://raw.githubusercontent.com/adv247/IOS/master/ZALO_Block_All.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.apple.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.txt
   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.extended.txt
