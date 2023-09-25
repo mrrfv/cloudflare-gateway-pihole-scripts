@@ -37,6 +37,7 @@ urls=(
   https://raw.githubusercontent.com/nextdns/piracy-blocklists/master/file-hosting
   https://raw.githubusercontent.com/ZYX2019/host-block-list/master/Custom.txt
   https://raw.githubusercontent.com/PoorPocketsMcNewHold/steamscamsites/master/steamscamsite.txt
+  https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/popupads-onlydomains.txt
   
     )
 
