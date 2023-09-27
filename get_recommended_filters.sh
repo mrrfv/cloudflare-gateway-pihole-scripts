@@ -6,38 +6,27 @@ touch input.csv
 # declare an array of urls
 urls=(
    https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/domain.txt
-  https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
-  https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/xiaomi
-  https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/apple
-  https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/alexa
-  https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-  https://abpvn.com/vip/hiepchau96.txt
-  https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt
-  https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/ChineseFilter/sections/adservers_firstparty.txt
-  https://gitlab.com/kowith337/PersonalFilterListCollection/raw/master/hosts/hosts_google_hotword.txt
-  https://hostfiles.frogeye.fr/firstparty-only-trackers.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.apple.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.extended.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.winoffice.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.amazon.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.huawei.txt
-  https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/samsung
-  https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains
-  https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/huawei
-  https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/roku
-  https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/sonos
-  https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/windows
-  https://raw.githubusercontent.com/gieljnssns/Social-media-Blocklists/master/adguard-netflix.txt
-  https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/nosafesearch-onlydomains.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/anti.piracy-onlydomains.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt
-  https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt
-  https://raw.githubusercontent.com/nextdns/piracy-blocklists/master/file-hosting
-  https://raw.githubusercontent.com/ZYX2019/host-block-list/master/Custom.txt
-  https://raw.githubusercontent.com/PoorPocketsMcNewHold/steamscamsites/master/steamscamsite.txt
-  https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/popupads-onlydomains.txt
+   https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/popupads-onlydomains.txt
+   https://raw.githubusercontent.com/funxiun/oisd/main/small_oisd.txt
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/multi-onlydomains.txt
+   https://raw.githubusercontent.com/nextdns/dns-bypass-methods/main/encrypted-dns
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.apple.txt
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.txt
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.extended.txt
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.winoffice.txt
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.amazon.txt
+   https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.huawei.txt
+   https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/samsung
+   https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains
+   https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/huawei
+   https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/roku
+   https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/sonos
+   https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/windows
+   https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/xiaomi
+   https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/apple
+   https://raw.githubusercontent.com/nextdns/native-tracking-domains/main/domains/alexa
+   https://raw.githubusercontent.com/adv247/IOS/master/ZALO_Block_All.txt
   
     )
 
