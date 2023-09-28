@@ -1,3 +1,5 @@
+import { existsSync } from "fs";
+import { unlink } from "fs/promises";
 import { resolve } from "path";
 
 import {
@@ -15,7 +17,13 @@ const blocklistUrls = USER_DEFINED_BLOCKLIST_URLS || RECOMMENDED_BLOCKLIST_URLS;
 const listType = process.argv[2];
 
 const downloadLists = async (filename, urls) => {
-  await downloadFiles(resolve(`./${filename}`), urls);
+  const filePath = resolve(`./${filename}`);
+
+  if (existsSync(filePath)) {
+    await unlink(filePath);
+  }
+
+  await downloadFiles(filePath, urls);
   console.log(
     `Done. The ${filename} file contains merged data from the following list(s):`
   );
