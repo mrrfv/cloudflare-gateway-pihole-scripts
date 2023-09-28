@@ -5,6 +5,7 @@ touch input.csv
 
 # declare an array of urls
 urls=(
+   https://abpvn.com/android/abpvn.txt
    https://raw.githubusercontent.com/bigdargon/hostsVN/master/option/domain.txt
    https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
    https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/popupads-onlydomains.txt
