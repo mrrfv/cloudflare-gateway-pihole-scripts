@@ -33,20 +33,18 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Download recommended whitelist
-        run: bash ./get_recommended_whitelist.sh
+      - name: Download allowlists
+        run: npm run download:allowlist
         env:
           ALLOWLIST_URLS: ${{ vars.ALLOWLIST_URLS }}
 
-      - name: Download recommended filters
-        run: bash ./get_recommended_filters.sh
+      - name: Download blocklists
+        run: npm run download:blocklist
         env:
           BLOCKLIST_URLS: ${{ vars.BLOCKLIST_URLS }}
 
       - name: Delete old rules and lists
-        run: |
-          node cf_gateway_rule_delete.js
-          node cf_list_delete.js
+        run: npm run cloudflare-delete
         env:
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
@@ -55,9 +53,7 @@ jobs:
           FAST_MODE: ${{ vars.FAST_MODE }}
 
       - name: Create new rules and lists
-        run: |
-          node cf_list_create.js
-          node cf_gateway_rule_create.js
+        run: npm run cloudflare-create
         env:
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
