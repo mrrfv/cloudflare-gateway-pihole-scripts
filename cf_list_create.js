@@ -125,9 +125,7 @@ console.log(`Number of unnecessary domains: ${unnecessaryDomainCount}`);
 console.log(`Number of blocked domains: ${domains.length}`);
 console.log(`Number of allowed domains: ${allowedDomainCount}`);
 console.log(
-  `Number of lists which will be created: ${Math.ceil(
-    domains.length / LIST_ITEM_SIZE
-  )}`
+  `Number of lists to be created: ${Math.ceil(domains.length / LIST_ITEM_SIZE)}`
 );
 console.log("\n\n");
 
