@@ -1,5 +1,7 @@
 # Environment variables
 
+Environment variables are like a configuration file. They are stored in a file called `.env` in the same directory as the scripts. You have to create this file yourself (an example file is provided in the repository). Below is a list of the most important environment variables and their descriptions.
+
 ## Obtaining your Cloudflare credentials
 
 ### `CLOUDFLARE_ACCOUNT_ID`
@@ -30,7 +32,7 @@ The Cloudflare list item limit is the maximum number of items (blocked domains) 
 
 ### `DRY_RUN`
 
-Processes block/allow lists without actually adding/removing domains from Cloudflare. Avoid using this option.
+Processes block/allow lists without actually adding/removing domains from Cloudflare. Avoid using this option unless you know what you are doing.
 
 ### `FAST_MODE`
 
