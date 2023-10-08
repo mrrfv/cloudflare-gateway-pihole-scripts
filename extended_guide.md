@@ -2,7 +2,7 @@
 
 ## Obtaining your Cloudflare credentials
 
-### CLOUDFLARE_ACCOUNT_ID
+### `CLOUDFLARE_ACCOUNT_ID`
 
 You can find your Cloudflare account ID in the [Cloudflare dashboard](https://dash.cloudflare.com/). Click on any domain you own, then on the "Overview" tab. Scroll down to the bottom of the page and you will see your account ID on the right side.
 
@@ -14,25 +14,25 @@ https://dash.cloudflare.com/1234567890abcdef1234567890abcdef
 
 In this example, `1234567890abcdef1234567890abcdef` is the account ID.
 
-### CLOUDFLARE_API_KEY
+### `CLOUDFLARE_API_KEY`
 
 The Cloudflare API key can be found in the [Cloudflare dashboard](https://dash.cloudflare.com/) too. Click on your profile picture (or user icon) in the top right corner, then click on "API Tokens" in the sidebar. Scroll down to the "API Keys" section and click on "View" next to the Global API Key.
 
-### CLOUDFLARE_ACCOUNT_EMAIL
+### `CLOUDFLARE_ACCOUNT_EMAIL`
 
 The Cloudflare account email is the email address you use to log in to the Cloudflare dashboard.
 
-### CLOUDFLARE_LIST_ITEM_LIMIT
+### `CLOUDFLARE_LIST_ITEM_LIMIT`
 
 The Cloudflare list item limit is the maximum number of items (blocked domains) that can be added to Cloudflare. The default value of 300,000 is the maximum allowed by Cloudflare for free accounts. If you pay for Cloudflare Zero Trust, you might be able to increase this value.
 
 ## Other
 
-### DRY_RUN
+### `DRY_RUN`
 
 Processes block/allow lists without actually adding/removing domains from Cloudflare. Avoid using this option.
 
-### FAST_MODE
+### `FAST_MODE`
 
 Sends requests much faster, but might cause rate limiting issues. Use with caution.
 
