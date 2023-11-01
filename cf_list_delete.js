@@ -28,6 +28,8 @@ import { FAST_MODE } from "./lib/constants.js";
     `Got ${lists.length} lists, ${cgpsLists.length} of which are CGPS lists that will be deleted.`
   );
 
+  console.log(`Deleting ${cgpsLists.length} lists...`);
+
   if (FAST_MODE) {
     await deleteZeroTrustListsAtOnce(cgpsLists);
     return;
