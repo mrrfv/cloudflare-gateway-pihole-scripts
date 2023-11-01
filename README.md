@@ -53,7 +53,7 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 
 - `CLOUDFLARE_API_TOKEN`: Your Cloudflare API Token with Zero Trust read and edit permissions
 - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-- `CLOUDFLARE_LIST_ITEM_LIMIT`: The maximum number of blocked domains allowed for your Cloudflare Zero Trust plan. Use 300000 for the free plan or if you're unsure.
+- `CLOUDFLARE_LIST_ITEM_LIMIT`: The maximum number of blocked domains allowed for your Cloudflare Zero Trust plan. Default to 300,000. Optional if you are using the free plan.
 - `PING_URL`: /Optional/ The HTTP(S) URL to ping (using curl) after the GitHub Action has successfully updated your filters. Useful for monitoring.
 
 3. Create the following GitHub Actions variables in your repository settings if you desire:
