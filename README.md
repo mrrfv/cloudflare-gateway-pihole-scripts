@@ -51,9 +51,8 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 1. Create a new empty, private repository. Forking or public repositories are discouraged, but supported - although the script never leaks your API keys and GitHub Actions secrets are automatically redacted from the logs, it's better to be safe than sorry.
 2. Create the following GitHub Actions secrets in your repository settings:
 
-- `CLOUDFLARE_API_KEY`: Your Cloudflare API key
+- `CLOUDFLARE_API_TOKEN`: Your Cloudflare API Token with Zero Trust read and write permissions
 - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-- `CLOUDFLARE_ACCOUNT_EMAIL`: Your Cloudflare account email
 - `CLOUDFLARE_LIST_ITEM_LIMIT`: The maximum number of blocked domains allowed for your Cloudflare Zero Trust plan. Use 300000 for the free plan or if you're unsure.
 - `PING_URL`: /Optional/ The HTTP(S) URL to ping (using curl) after the GitHub Action has successfully updated your filters. Useful for monitoring.
 
