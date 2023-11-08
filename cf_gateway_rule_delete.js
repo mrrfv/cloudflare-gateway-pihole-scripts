@@ -16,4 +16,4 @@ const cgpsRule = rules.find(({ name }) => name === "CGPS Filter Lists");
   await deleteZeroTrustRule(cgpsRule.id);
 })();
 // Send a notification to the webhook
-await notifyWebhook("CF Gateway Rule Create script finished running");
+await notifyWebhook("CF Gateway Rule Delete script finished running");
