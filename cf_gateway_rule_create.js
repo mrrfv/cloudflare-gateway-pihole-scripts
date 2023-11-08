@@ -7,5 +7,6 @@ const wirefilterExpression = lists.reduce((previous, current) => {
   return `${previous} any(dns.domains[*] in \$${current.id}) or `;
 }, "");
 
+console.log("Creating rule...");
 // Remove the trailing ' or '
 await createZeroTrustRule(wirefilterExpression.slice(0, -4));
