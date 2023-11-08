@@ -12,7 +12,7 @@ import {
   LIST_ITEM_SIZE,
   PROCESSING_FILENAME,
 } from "./lib/constants.js";
-import { normalizeDomain } from "./lib/helpers.js";
+import { normalizeDomain, notifyWebhook } from "./lib/helpers.js";
 import {
   extractDomain,
   isComment,
@@ -143,8 +143,12 @@ console.log("\n\n");
 
   if (FAST_MODE) {
     await createZeroTrustListsAtOnce(domains);
+    // TODO: make this less repetitive
+    await notifyWebhook(`CF List Create script finished running (${domains.length} domains, ${numberOfLists} lists)`);
     return;
   }
 
   await createZeroTrustListsOneByOne(domains);
+
+  await notifyWebhook(`CF List Create script finished running (${domains.length} domains, ${numberOfLists} lists)`);
 })();
