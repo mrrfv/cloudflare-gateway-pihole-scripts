@@ -11,6 +11,6 @@ const cgpsRule = rules.find(({ name }) => name === "CGPS Filter Lists");
     return;
   }
 
-  console.log(`Deleting rule ${cgpsRule.name}`);
+  console.log(`Deleting rule ${cgpsRule.name}...`);
   await deleteZeroTrustRule(cgpsRule.id);
 })();
