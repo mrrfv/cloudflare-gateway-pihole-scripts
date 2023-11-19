@@ -73,37 +73,28 @@ await readFile(resolve(`./${blocklistFilename}`), (line, rl) => {
 
   processedDomainCount++;
 
-  // Get all the levels of the domain and check from the highest
-  // because we are blocking all subdomains
-  // Example: fourth.third.example.com => ["example.com", "third.example.com", "fourth.third.example.com"]
-  const anyDomainExists = extractDomain(domain)
-    .reverse()
-    .some((item) => {
-      if (blocklist.has(item)) {
-        if (item === domain) {
-          // The exact domain is already blocked
-          console.log(`Found ${item} in blocklist already - Skipping`);
-          duplicateDomainCount++;
-        } else {
-          // The higher-level domain is already blocked
-          // so it's not necessary to block this domain
-          console.log(
-            `Found ${item} in blocklist already - Skipping ${domain}`
-          );
-          unnecessaryDomainCount++;
-        }
-
-        return true;
-      }
-
-      return false;
-    });
-
-  if (anyDomainExists) return;
-
   if (allowlist.has(domain)) {
     console.log(`Found ${domain} in allowlist - Skipping`);
     allowedDomainCount++;
+    return;
+  }
+
+  if (blocklist.has(domain)) {
+    console.log(`Found ${domain} in blocklist already - Skipping`);
+    duplicateDomainCount++;
+    return;
+  }
+
+  // Get all the levels of the domain and check from the highest
+  // because we are blocking all subdomains
+  // Example: fourth.third.example.com => ["example.com", "third.example.com", "fourth.third.example.com"]
+  for (const item of extractDomain(domain).slice(1)) {
+    if (!blocklist.has(item)) continue;
+
+    // The higher-level domain is already blocked
+    // so it's not necessary to block this domain
+    console.log(`Found ${item} in blocklist already - Skipping ${domain}`);
+    unnecessaryDomainCount++;
     return;
   }
 
@@ -124,8 +115,8 @@ console.log("\n\n");
 console.log(`Number of processed domains: ${processedDomainCount}`);
 console.log(`Number of duplicate domains: ${duplicateDomainCount}`);
 console.log(`Number of unnecessary domains: ${unnecessaryDomainCount}`);
-console.log(`Number of blocked domains: ${domains.length}`);
 console.log(`Number of allowed domains: ${allowedDomainCount}`);
+console.log(`Number of blocked domains: ${domains.length}`);
 console.log(`Number of lists to be created: ${numberOfLists}`);
 console.log("\n\n");
 
@@ -143,12 +134,11 @@ console.log("\n\n");
 
   if (FAST_MODE) {
     await createZeroTrustListsAtOnce(domains);
-    // TODO: make this less repetitive
-    await notifyWebhook(`CF List Create script finished running (${domains.length} domains, ${numberOfLists} lists)`);
-    return;
+  } else {
+    await createZeroTrustListsOneByOne(domains);
   }
 
-  await createZeroTrustListsOneByOne(domains);
-
-  await notifyWebhook(`CF List Create script finished running (${domains.length} domains, ${numberOfLists} lists)`);
+  await notifyWebhook(
+    `CF List Create script finished running (${domains.length} domains, ${numberOfLists} lists)`
+  );
 })();
