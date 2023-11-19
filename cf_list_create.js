@@ -17,6 +17,7 @@ import {
   extractDomain,
   isComment,
   isValidDomain,
+  memoize,
   readFile,
 } from "./lib/utils.js";
 
@@ -33,6 +34,7 @@ let processedDomainCount = 0;
 let unnecessaryDomainCount = 0;
 let duplicateDomainCount = 0;
 let allowedDomainCount = 0;
+const memoizedNormalizeDomain = memoize(normalizeDomain);
 
 // Read allowlist
 console.log(`Processing ${allowlistFilename}`);
@@ -43,7 +45,7 @@ await readFile(resolve(`./${allowlistFilename}`), (line) => {
 
   if (isComment(_line)) return;
 
-  const domain = normalizeDomain(_line, true);
+  const domain = memoizedNormalizeDomain(_line, true);
 
   if (!isValidDomain(domain)) return;
 
@@ -65,7 +67,7 @@ await readFile(resolve(`./${blocklistFilename}`), (line, rl) => {
   if (isComment(_line)) return;
 
   // Remove prefixes and suffixes in hosts, wildcard or adblock format
-  const domain = normalizeDomain(_line);
+  const domain = memoizedNormalizeDomain(_line);
 
   // Check if it is a valid domain which is not a URL or does not contain
   // characters like * in the middle of the domain
