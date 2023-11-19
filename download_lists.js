@@ -38,6 +38,7 @@ const downloadLists = async (filename, urls) => {
   } catch (err) {
     console.error(`An error occurred while processing ${filename}:\n`, err);
     console.error("URLs:\n", urls);
+    throw err;
   }
 };
 
