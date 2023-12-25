@@ -16,13 +16,17 @@ https://dash.cloudflare.com/1234567890abcdef1234567890abcdef
 
 In this example, `1234567890abcdef1234567890abcdef` is the account ID.
 
-### `CLOUDFLARE_API_KEY`
+### `CLOUDFLARE_API_TOKEN`
 
-The Cloudflare API key can be found in the [Cloudflare dashboard](https://dash.cloudflare.com/) too. Click on your profile picture (or user icon) in the top right corner, then click on "API Tokens" in the sidebar. Scroll down to the "API Keys" section and click on "View" next to the Global API Key.
+Cloudflare API Token can be created in your [Cloudflare profile](https://dash.cloudflare.com/profile/api-tokens):
 
-### `CLOUDFLARE_ACCOUNT_EMAIL`
+1. Click "Create Token" and click "Get Started" in the "Create Custom Token" row.
+2. Enter any name for your token
+3. Add Zero Trust Read and Edit permissions for your account
+4. Click "Continue to summary" and click "Create Token"
+5. You will see the created API Token
 
-The Cloudflare account email is the email address you use to log in to the Cloudflare dashboard.
+![Creating API Token](.github/images/create_api_token.png)
 
 ### `CLOUDFLARE_LIST_ITEM_LIMIT`
 

@@ -1,6 +1,6 @@
-import { existsSync } from "fs";
-import { unlink } from "fs/promises";
-import { resolve } from "path";
+import { existsSync } from "node:fs";
+import { unlink } from "node:fs/promises";
+import { resolve } from "node:path";
 
 import {
   LIST_TYPE,
@@ -38,6 +38,7 @@ const downloadLists = async (filename, urls) => {
   } catch (err) {
     console.error(`An error occurred while processing ${filename}:\n`, err);
     console.error("URLs:\n", urls);
+    throw err;
   }
 };
 

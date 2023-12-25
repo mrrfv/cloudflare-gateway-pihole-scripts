@@ -30,6 +30,7 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 3. Cloudflare email, API key (NOT the API token), and account ID
 4. A file containing the domains you want to block - **max 300,000 domains for the free plan** - in the working directory named `blocklist.txt`. Mullvad provides awesome [DNS blocklists](https://github.com/mullvad/dns-blocklists) that work well with this project. A script that downloads recommended blocklists, `download_lists.js`, is included.
 5. Optional: You can whitelist domains by putting them in a file `allowlist.txt`. You can also use the `get_recomended_whitelist.sh` Bash script to get the recommended whitelists.
+6. Optional: A Discord (or similar) webhook URL to send notifications to.
 
 ### Running locally
 
@@ -51,11 +52,11 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 1. Create a new empty, private repository. Forking or public repositories are discouraged, but supported - although the script never leaks your API keys and GitHub Actions secrets are automatically redacted from the logs, it's better to be safe than sorry.
 2. Create the following GitHub Actions secrets in your repository settings:
 
-- `CLOUDFLARE_API_KEY`: Your Cloudflare API key
+- `CLOUDFLARE_API_TOKEN`: Your Cloudflare API Token with Zero Trust read and edit permissions
 - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-- `CLOUDFLARE_ACCOUNT_EMAIL`: Your Cloudflare account email
-- `CLOUDFLARE_LIST_ITEM_LIMIT`: The maximum number of blocked domains allowed for your Cloudflare Zero Trust plan. Use 300000 for the free plan or if you're unsure.
+- `CLOUDFLARE_LIST_ITEM_LIMIT`: The maximum number of blocked domains allowed for your Cloudflare Zero Trust plan. Default to 300,000. Optional if you are using the free plan.
 - `PING_URL`: /Optional/ The HTTP(S) URL to ping (using curl) after the GitHub Action has successfully updated your filters. Useful for monitoring.
+- `DISCORD_WEBHOOK_URL`: /Optional/ The Discord (or similar) webhook URL to send notifications to. Good for monitoring as well.
 
 3. Create the following GitHub Actions variables in your repository settings if you desire:
 
