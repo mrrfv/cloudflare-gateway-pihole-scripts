@@ -1,0 +1,66 @@
+name: Update Filter Lists
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  cgps:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    
+    - name: Clone repository and switch to v1 branch
+      run: |
+        git clone https://github.com/mrrfv/cloudflare-gateway-pihole-scripts.git
+        cd cloudflare-gateway-pihole-scripts
+        git checkout v1
+
+    - name: Install npm dependencies
+      run: npm ci
+      working-directory: cloudflare-gateway-pihole-scripts
+      
+    - name: Download recommended whitelist
+      run: bash ./get_recommended_whitelist.sh
+      working-directory: cloudflare-gateway-pihole-scripts
+      
+    - name: Download recommended filters
+      run: bash ./get_recommended_filters.sh
+      working-directory: cloudflare-gateway-pihole-scripts
+    
+    - name: Delete old rules and lists
+      run: |
+        node cf_gateway_rule_delete.js
+        node cf_list_delete.js
+      working-directory: cloudflare-gateway-pihole-scripts
+      env:
+        CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+        CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
+
+    - name: Create new rules and lists
+      run: |
+        node cf_list_create.js
+        node cf_gateway_rule_create.js
+      working-directory: cloudflare-gateway-pihole-scripts
+      env:
+        CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+        CLOUDFLARE_ACCOUNT_EMAIL: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
+
+    - name: Send ping request
+      if: env.PING_URL != ''
+      working-directory: cloudflare-gateway-pihole-scripts
+      env:
+        PING_URL: ${{ secrets.PING_URL }}
+      run: |
+        curl "${{ env.PING_URL }}"
