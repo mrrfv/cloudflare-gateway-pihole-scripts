@@ -14,10 +14,10 @@
   },
   "type": "module",
   "dependencies": {
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.4.1",
     "node-fetch": "^3.3.2"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   }
 }
