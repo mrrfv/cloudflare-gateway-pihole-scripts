@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: connor-baer/action-sync-branch@v1.1.0
         with:
           branch: v1
