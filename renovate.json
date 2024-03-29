@@ -1,11 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices"],
-  "automergeType": "branch",
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest", "pinDigest"],
-      "automerge": true
-    }
-  ]
+  "extends": [
+    "config:best-practices",
+    "config:js-app",
+    ":automergeBranch",
+    ":automergeDigest",
+    ":automergeMinor"
+  ],
+  "github-actions": {
+    "fileMatch": ["^auto_update_github_action.yml$"]
+  }
 }
