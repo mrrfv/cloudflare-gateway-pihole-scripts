@@ -18,6 +18,7 @@ env:
 jobs:
   cgps:
     permissions:
+      # Required for gautamkrishnar/keepalive-workflow@v2 to work
       actions: write
     runs-on: ubuntu-latest
     steps:
