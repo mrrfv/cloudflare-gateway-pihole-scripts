@@ -17,9 +17,10 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 - Support for basic hosts files
 - Full support for domain lists
 - Automatically cleans up filter lists: removes duplicates, invalid domains, comments and more
-- Works fully unattended
-- Whitelist support, allowing you to prevent false positives and breakage by forcing trusted domains to always be unblocked.
-- Optional health check: Sends a ping request ensuring continuous monitoring and alerting for the workflow execution.
+- Works **fully unattended**
+- **Allowlist support**, allowing you to prevent false positives and breakage by forcing trusted domains to always be unblocked.
+- Experimental **SNI-based filtering** support that works independently of DNS settings, preventing unauthorized or malicious DNS changes from bypassing the filter.
+- Optional health check: Sends a ping request ensuring continuous monitoring and alerting for the workflow execution, or messages a Discord webhook with progress.
 
 ## Usage
 
@@ -47,7 +48,7 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 
 These scripts can be run using GitHub Actions so your filters will be automatically updated and pushed to Cloudflare Gateway. This is useful if you are using a frequently updated malware blocklist.
 
-Please note that the GitHub Action downloads the recommended blocklists and whitelist by default. You can change this behavior by editing the file.
+Please note that the GitHub Action downloads the recommended blocklists and whitelist by default. You can change this behavior by setting Actions variables.
 
 1. Create a new empty, private repository. Forking or public repositories are discouraged, but supported - although the script never leaks your API keys and GitHub Actions secrets are automatically redacted from the logs, it's better to be safe than sorry.
 2. Create the following GitHub Actions secrets in your repository settings:
@@ -63,6 +64,7 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 - `FAST_MODE`: Enable the scripts to send the requests simultaneously. Beware that there's a rate limit of 1200 requests per five minutes (https://developers.cloudflare.com/fundamentals/api/reference/limits/) so make sure you know what you are doing.
 - `ALLOWLIST_URLS`: Uses your own allowlists. One URL per line. Recommended allowlists will be used if this variable is not provided.
 - `BLOCKLIST_URLS`: Uses your own blocklists. One URL per line. Recommended blocklists will be used if this variable is not provided.
+- `BLOCK_PAGE_ENABLED`: Enable showing block page if host is blocked.
 
 4. Create a new file in the repository named `.github/workflows/main.yml` with the contents of `auto_update_github_action.yml` found in this repository. The default settings will update your filters every week at 3 AM UTC. You can change this by editing the `schedule` property.
 5. Enable GitHub Actions in your repository settings.
@@ -73,7 +75,7 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 2. Click on the default location or create one if it doesn't exist.
 3. Configure your router or device based on the provided DNS addresses.
 
-Alternatively, you can install the Cloudflare WARP client and log in to Zero Trust. This method proxies your traffic over Cloudflare servers, meaning it works similarly to a commercial VPN.
+Alternatively, you can install the Cloudflare WARP client and log in to Zero Trust. This method proxies your traffic over Cloudflare servers, meaning it works similarly to a commercial VPN. You need to do this if you want to use the SNI-based filtering feature, as it requires Cloudflare to inspect your raw traffic (HTTPS remains encrypted if "TLS decryption" is disabled).
 
 ### Dry runs
 
@@ -94,7 +96,7 @@ To see if e.g. your filter lists are valid without actually changing anything in
 
 ### Cloudflare Gateway?
 
-- Requires a valid credit card or PayPal account
+- Requires a valid payment card or PayPal account
 - Limit of 300k domains on the free plan
 
 ### a hosts file?
@@ -107,7 +109,3 @@ To see if e.g. your filter lists are valid without actually changing anything in
 ## License
 
 MIT License. See `LICENSE` for more information.
-
-## Donations
-
-If you would like to donate to support this project, you can do so via Liberapay - click the Sponsor button or see my GitHub profile for the link.
