@@ -2,18 +2,21 @@ import { deleteZeroTrustRule, getZeroTrustRules } from "./lib/api.js";
 import { notifyWebhook } from "./lib/helpers.js";
 
 const { result: rules } = await getZeroTrustRules();
-const cgpsRule = rules.find(({ name }) => name === "CGPS Filter Lists");
+const cgpsRules = rules.filter(({ name }) => name.startsWith("CGPS Filter Lists"));
 
 (async () => {
-  if (!cgpsRule) {
+  if (!cgpsRules.length) {
     console.warn(
-      "No rule with matching name found - this is not an issue if you haven't run the create script yet. Exiting."
+      "No rule(s) with matching name found - this is not an issue if you haven't run the create script yet. Exiting."
     );
     return;
   }
 
-  console.log(`Deleting rule ${cgpsRule.name}...`);
-  await deleteZeroTrustRule(cgpsRule.id);
+  for (const cgpsRule of cgpsRules) {
+    console.log(`Deleting rule ${cgpsRule.name}...`);
+    await deleteZeroTrustRule(cgpsRule.id);
+  }
 })();
+
 // Send a notification to the webhook
 await notifyWebhook("CF Gateway Rule Delete script finished running");

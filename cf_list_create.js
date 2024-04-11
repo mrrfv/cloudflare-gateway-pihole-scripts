@@ -6,6 +6,7 @@ import {
   createZeroTrustListsOneByOne,
 } from "./lib/api.js";
 import {
+  DEBUG,
   DRY_RUN,
   FAST_MODE,
   LIST_ITEM_LIMIT,
@@ -76,13 +77,13 @@ await readFile(resolve(`./${blocklistFilename}`), (line, rl) => {
   processedDomainCount++;
 
   if (allowlist.has(domain)) {
-    console.log(`Found ${domain} in allowlist - Skipping`);
+    if (DEBUG) console.log(`Found ${domain} in allowlist - Skipping`);
     allowedDomainCount++;
     return;
   }
 
   if (blocklist.has(domain)) {
-    console.log(`Found ${domain} in blocklist already - Skipping`);
+    if (DEBUG) console.log(`Found ${domain} in blocklist already - Skipping`);
     duplicateDomainCount++;
     return;
   }
@@ -95,7 +96,7 @@ await readFile(resolve(`./${blocklistFilename}`), (line, rl) => {
 
     // The higher-level domain is already blocked
     // so it's not necessary to block this domain
-    console.log(`Found ${item} in blocklist already - Skipping ${domain}`);
+    if (DEBUG) console.log(`Found ${item} in blocklist already - Skipping ${domain}`);
     unnecessaryDomainCount++;
     return;
   }
