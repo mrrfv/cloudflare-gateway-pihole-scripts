@@ -1,22 +1,24 @@
-# Environment variables
+# Extended Guide
+
+## Environment variables
 
 Environment variables are like a configuration file. They are stored in a file called `.env` in the same directory as the scripts. You have to create this file yourself (an example file is provided in the repository). Below is a list of the most important environment variables and their descriptions.
 
-## Obtaining your Cloudflare credentials
+### Obtaining your Cloudflare credentials
 
-### `CLOUDFLARE_ACCOUNT_ID`
+#### `CLOUDFLARE_ACCOUNT_ID`
 
 You can find your Cloudflare account ID in the [Cloudflare dashboard](https://dash.cloudflare.com/). Click on any domain you own, then on the "Overview" tab. Scroll down to the bottom of the page and you will see your account ID on the right side.
 
 Alternatively, you can copy the account ID from the URL of any page in the Cloudflare dashboard. The URL will look like this:
 
-```
+```text
 https://dash.cloudflare.com/1234567890abcdef1234567890abcdef
 ```
 
 In this example, `1234567890abcdef1234567890abcdef` is the account ID.
 
-### `CLOUDFLARE_API_TOKEN`
+#### `CLOUDFLARE_API_TOKEN`
 
 Cloudflare API Token can be created in your [Cloudflare profile](https://dash.cloudflare.com/profile/api-tokens):
 
@@ -28,21 +30,21 @@ Cloudflare API Token can be created in your [Cloudflare profile](https://dash.cl
 
 ![Creating API Token](.github/images/create_api_token.png)
 
-### `CLOUDFLARE_LIST_ITEM_LIMIT`
+#### `CLOUDFLARE_LIST_ITEM_LIMIT`
 
 The Cloudflare list item limit is the maximum number of items (blocked domains) that can be added to Cloudflare. The default value of 300,000 is the maximum allowed by Cloudflare for free accounts. If you pay for Cloudflare Zero Trust, you might be able to increase this value.
 
-## Other
+### Other
 
-### `DRY_RUN`
+#### `DRY_RUN`
 
 Processes block/allow lists without actually adding/removing domains from Cloudflare. Avoid using this option unless you know what you are doing.
 
-### `FAST_MODE`
+#### `FAST_MODE`
 
 Sends requests much faster, but might cause rate limiting issues. Use with caution.
 
-# Example usage
+## Example usage
 
 These commands should be run in a terminal.
 
