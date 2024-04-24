@@ -69,9 +69,6 @@ jobs:
         env:
           PING_URL: ${{ secrets.PING_URL }}
 
-      - name: Keep workflow alive
-        uses: gautamkrishnar/keepalive-workflow@v2
-
   keepalive:
     runs-on: ubuntu-latest
     permissions:
