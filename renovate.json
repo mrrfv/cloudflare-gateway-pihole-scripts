@@ -4,7 +4,6 @@
     "config:recommended",
     "config:js-app",
     ":automergeBranch",
-    ":automergeDigest",
     ":automergeMinor"
   ],
   "github-actions": {
