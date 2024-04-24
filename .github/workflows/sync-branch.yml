@@ -7,10 +7,12 @@ on:
 
 jobs:
   sync-branch:
-    permissions:
-      contents: write
     name: Update v1 branch
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    # Only run on original repository
+    if: ${{ github.repository_id == 635386785 }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
