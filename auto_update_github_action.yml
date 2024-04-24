@@ -73,4 +73,4 @@ jobs:
           PING_URL: ${{ secrets.PING_URL }}
 
       - name: Keep workflow alive
-        uses: gautamkrishnar/keepalive-workflow@beb86212524e1ae856d1cd80efb44e73bf7daf4a # v2
+        uses: gautamkrishnar/keepalive-workflow@v2

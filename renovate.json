@@ -5,7 +5,8 @@
     "config:js-app",
     ":automergeBranch",
     ":automergeDigest",
-    ":automergeMinor"
+    ":automergeMinor",
+    ":pinDigestsDisabled"
   ],
   "github-actions": {
     "fileMatch": ["^auto_update_github_action.yml$"]
