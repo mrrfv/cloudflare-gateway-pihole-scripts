@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
+        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
         with:
           ref: main
       - uses: connor-baer/action-sync-branch@0298935825bb8194982d322e7730b783a2ed9cd2 # v1.1.0
