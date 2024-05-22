@@ -1,0 +1,26 @@
+name: Sync branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync-branch:
+    name: Update v1 branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    # Only run on original repository
+    if: ${{ github.repository_id == 635386785 }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: connor-baer/action-sync-branch@v1.1.0
+        with:
+          branch: v1
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Force push is enabled since v1 is supposed to be an exact copy of main until breaking changes are made
+          force: true

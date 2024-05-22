@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # create an empty input.csv file
 touch input.csv
 
@@ -33,3 +34,6 @@ done
 
 # print a message when done
 echo "Done. The input.csv file contains merged data from recommended filter lists."
+=======
+node download_lists.js blocklist
+

@@ -10,6 +10,9 @@ lerna-debug.log*
 # CGPS
 output
 input.csv
+whitelist.csv
+blocklist.txt
+allowlist.txt
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

@@ -1,6 +1,23 @@
 {
+  "scripts": {
+    "start": "npm run download && npm run cloudflare-delete && npm run cloudflare-create",
+    "dry": "npm run download && DRY_RUN=1 npm run cloudflare-create:list",
+    "download": "node download_lists.js",
+    "download:allowlist": "node download_lists.js allowlist",
+    "download:blocklist": "node download_lists.js blocklist",
+    "cloudflare-create": "npm run cloudflare-create:list && npm run cloudflare-create:rule",
+    "cloudflare-delete": "npm run cloudflare-delete:rule && npm run cloudflare-delete:list",
+    "cloudflare-create:rule": "node cf_gateway_rule_create.js",
+    "cloudflare-create:list": "node cf_list_create.js",
+    "cloudflare-delete:rule": "node cf_gateway_rule_delete.js",
+    "cloudflare-delete:list": "node cf_list_delete.js"
+  },
+  "type": "module",
   "dependencies": {
-    "axios": "^1.4.0",
-    "dotenv": "^16.0.3"
+    "dotenv": "16.4.5",
+    "node-fetch": "3.3.2"
+  },
+  "engines": {
+    "node": "20.13.1"
   }
 }

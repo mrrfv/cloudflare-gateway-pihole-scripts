@@ -1,65 +1,33 @@
-require("dotenv").config();
-const axios = require('axios');
+import { createZeroTrustRule, getZeroTrustLists } from "./lib/api.js";
+import { BLOCK_BASED_ON_SNI } from "./lib/constants.js";
+import { notifyWebhook } from "./lib/helpers.js";
 
-const API_TOKEN = process.env.CLOUDFLARE_API_KEY;
-const ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
-const ACCOUNT_EMAIL = process.env.CLOUDFLARE_ACCOUNT_EMAIL;
+const { result: lists } = await getZeroTrustLists();
 
-// Function to read Cloudflare Zero Trust lists
-async function getZeroTrustLists() {
-  const response = await axios.get(
-    `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/lists`,
-    {
-      headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
-        'Content-Type': 'application/json',
-        'X-Auth-Email': ACCOUNT_EMAIL,
-        'X-Auth-Key': API_TOKEN,
-      },
-    }
-  );
+// Create a Wirefilter expression to match DNS queries against all the lists
+const wirefilterDNSExpression = lists.reduce((previous, current) => {
+  if (!current.name.startsWith("CGPS List")) return previous;
 
-  return response.data.result;
+  return `${previous} any(dns.domains[*] in \$${current.id}) or `;
+}, "");
+
+console.log("Creating DNS rule...");
+// .slice removes the trailing ' or '
+await createZeroTrustRule(wirefilterDNSExpression.slice(0, -4), "CGPS Filter Lists", ["dns"]);
+
+// Optionally create a rule that matches the SNI.
+// This only works for users who proxy their traffic through Cloudflare.
+if (BLOCK_BASED_ON_SNI) {
+  const wirefilterSNIExpression = lists.reduce((previous, current) => {
+    if (!current.name.startsWith("CGPS List")) return previous;
+  
+    return `${previous} any(net.sni.domains[*] in \$${current.id}) or `;
+  }, "");
+  
+  console.log("Creating SNI rule...");
+  // .slice removes the trailing ' or '
+  await createZeroTrustRule(wirefilterSNIExpression.slice(0, -4), "CGPS Filter Lists - SNI Based Filtering", ["l4"]);
 }
 
-;(async() => {
-    const lists = await getZeroTrustLists();
-    const filtered_lists = lists.filter(list => list.name.startsWith('CGPS List'));
-
-    let wirefilter_expression = '';
-
-    // Build the wirefilter expression
-    for (const list of filtered_lists) {
-        wirefilter_expression += `dns.fqdn in \$${list.id} or `;
-    }
-    // Remove the trailing ' or '
-    if (wirefilter_expression.endsWith(' or ')) {
-        wirefilter_expression = wirefilter_expression.slice(0, -4);
-    }
-    wirefilter_expression = wirefilter_expression.trim().replace('\n', '');
-    if (!process.env.CI) console.log(`Firewall expression contains ${wirefilter_expression.length} characters, and checks against ${filtered_lists.length} filter lists.`)
-
-    const resp = await axios.request({
-        method: 'POST',
-        url: `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/gateway/rules`,
-        headers: {
-            'Authorization': `Bearer ${API_TOKEN}`,
-            'Content-Type': 'application/json',
-            'X-Auth-Email': ACCOUNT_EMAIL,
-            'X-Auth-Key': API_TOKEN,
-        },
-        data: {
-            "name": "CGPS Filter Lists",
-            "description": "Filter lists created by Cloudflare Gateway Pi-hole Scripts. Avoid editing this rule. Changing the name of this rule will break the script.",
-            "enabled": true,
-            "action": "block",
-            "filters": ["dns"],
-            "traffic": wirefilter_expression,
-        }
-    });
-    console.log('Success:', resp.data.success);
-})();
-
-async function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+// Send a notification to the webhook
+await notifyWebhook("CF Gateway Rule Create script finished running");

@@ -1,9 +1,5 @@
 #!/bin/bash
-#  
-# Use the provided lists or add you own
-# https://oisd.nl/includedlists/whitelists
-# by creating an empty whitelist.csv file
-touch whitelist.csv
+
 
 # declare an array of urls
 urls=(
@@ -51,3 +47,6 @@ done
 
 # print a message when done
 echo "Done. The whitelist.csv file contains merged data from recommended whitelists."
+=======
+node download_lists.js allowlist
+
