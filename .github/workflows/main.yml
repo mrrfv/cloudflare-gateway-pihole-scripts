@@ -21,9 +21,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          repository: "mrrfv/cloudflare-gateway-pihole-scripts"
-          ref: "v1"
 
       - name: Install Node.js
         uses: actions/setup-node@v4
