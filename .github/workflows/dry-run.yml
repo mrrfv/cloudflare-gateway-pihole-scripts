@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - renovate/**
+  workflow_dispatch:
 
 jobs:
   run:
