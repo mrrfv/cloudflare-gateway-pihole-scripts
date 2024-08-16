@@ -1,6 +1,6 @@
 # Cloudflare Gateway Pi-hole Scripts (CGPS)
 
-![Cloudflare Gateway Analytics screenshot](.github/images/gateway_analytics.png)
+![Cloudflare Gateway Analytics screenshot showing a thousand blocked DNS requests](.github/images/gateway_analytics.png)
 
 Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and network traffic based on your firewall policies. This is a collection of scripts that can be used to get a similar experience as if you were using Pi-hole, but with Cloudflare Gateway - so no servers to maintain or need to buy a Raspberry Pi!
 
@@ -72,6 +72,10 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 3. Configure your router or device based on the provided DNS addresses.
 
 Alternatively, you can install the Cloudflare WARP client and log in to Zero Trust. This method proxies your traffic over Cloudflare servers, meaning it works similarly to a commercial VPN. You need to do this if you want to use the SNI-based filtering feature, as it requires Cloudflare to inspect your raw traffic (HTTPS remains encrypted if "TLS decryption" is disabled).
+
+### Malware blocking
+
+The default filter lists are only optimized for ad & tracker blocking because Cloudflare Zero Trust itself comes with much more advanced security features. It's recommended that you create your own Cloudflare Gateway firewall policies that leverage those features on top of CGPS.
 
 ### Dry runs
 
