@@ -1,6 +1,6 @@
 # Cloudflare Gateway Pi-hole Scripts (CGPS)
 
-![Cloudflare Gateway Analytics screenshot](.github/images/gateway_analytics.png)
+![Cloudflare Gateway Analytics screenshot showing a thousand blocked DNS requests](.github/images/gateway_analytics.png)
 
 Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and network traffic based on your firewall policies. This is a collection of scripts that can be used to get a similar experience as if you were using Pi-hole, but with Cloudflare Gateway - so no servers to maintain or need to buy a Raspberry Pi!
 
@@ -19,7 +19,7 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 - Automatically cleans up filter lists: removes duplicates, invalid domains, comments and more
 - Works **fully unattended**
 - **Allowlist support**, allowing you to prevent false positives and breakage by forcing trusted domains to always be unblocked.
-- Experimental **SNI-based filtering** support that works independently of DNS settings, preventing unauthorized or malicious DNS changes from bypassing the filter.
+- Experimental **SNI-based filtering** that works independently of DNS settings, preventing unauthorized or malicious DNS changes from bypassing the filter.
 - Optional health check: Sends a ping request ensuring continuous monitoring and alerting for the workflow execution, or messages a Discord webhook with progress.
 
 ## Usage
@@ -39,7 +39,7 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 2. Run `npm install` to install dependencies.
 3. Copy `.env.example` to `.env` and fill in the values.
 4. If this is a subsequent run, execute `node cf_gateway_rule_delete.js` and `node cf_list_delete.js` (in order) to delete old data.
-5. If you haven't downloaded any filters yourself, run the `node download_lists.js` command to download recommended filter lists (about 250 000 domains).
+5. If you haven't downloaded any filters yourself, run the `node download_lists.js` command to download recommended filter lists (about 50 000 domains).
 6. Run `node cf_list_create.js` to create the lists in Cloudflare Gateway. This will take a while.
 7. Run `node cf_gateway_rule_create.js` to create the firewall rule in Cloudflare Gateway.
 8. Profit!
@@ -72,6 +72,10 @@ Please note that the GitHub Action downloads the recommended blocklists and whit
 3. Configure your router or device based on the provided DNS addresses.
 
 Alternatively, you can install the Cloudflare WARP client and log in to Zero Trust. This method proxies your traffic over Cloudflare servers, meaning it works similarly to a commercial VPN. You need to do this if you want to use the SNI-based filtering feature, as it requires Cloudflare to inspect your raw traffic (HTTPS remains encrypted if "TLS decryption" is disabled).
+
+### Malware blocking
+
+The default filter lists are only optimized for ad & tracker blocking because Cloudflare Zero Trust itself comes with much more advanced security features. It's recommended that you create your own Cloudflare Gateway firewall policies that leverage those features on top of CGPS.
 
 ### Dry runs
 
