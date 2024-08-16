@@ -19,7 +19,7 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 - Automatically cleans up filter lists: removes duplicates, invalid domains, comments and more
 - Works **fully unattended**
 - **Allowlist support**, allowing you to prevent false positives and breakage by forcing trusted domains to always be unblocked.
-- Experimental **SNI-based filtering** support that works independently of DNS settings, preventing unauthorized or malicious DNS changes from bypassing the filter.
+- Experimental **SNI-based filtering** that works independently of DNS settings, preventing unauthorized or malicious DNS changes from bypassing the filter.
 - Optional health check: Sends a ping request ensuring continuous monitoring and alerting for the workflow execution, or messages a Discord webhook with progress.
 
 ## Usage
@@ -39,7 +39,7 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 2. Run `npm install` to install dependencies.
 3. Copy `.env.example` to `.env` and fill in the values.
 4. If this is a subsequent run, execute `node cf_gateway_rule_delete.js` and `node cf_list_delete.js` (in order) to delete old data.
-5. If you haven't downloaded any filters yourself, run the `node download_lists.js` command to download recommended filter lists (about 250 000 domains).
+5. If you haven't downloaded any filters yourself, run the `node download_lists.js` command to download recommended filter lists (about 50 000 domains).
 6. Run `node cf_list_create.js` to create the lists in Cloudflare Gateway. This will take a while.
 7. Run `node cf_gateway_rule_create.js` to create the firewall rule in Cloudflare Gateway.
 8. Profit!
