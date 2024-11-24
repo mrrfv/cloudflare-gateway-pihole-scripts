@@ -17,6 +17,11 @@ const blocklistUrls = USER_DEFINED_BLOCKLIST_URLS || RECOMMENDED_BLOCKLIST_URLS;
 const listType = process.argv[2];
 
 const downloadLists = async (filename, urls) => {
+  if (urls.length === 1 && filename === urls[0]) {
+    console.log(`Skipping download for ${filename}, explicitly using existing file`);
+    return;
+  }
+
   const filePath = resolve(`./${filename}`);
 
   if (existsSync(filePath)) {
