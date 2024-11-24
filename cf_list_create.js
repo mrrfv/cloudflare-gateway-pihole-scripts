@@ -97,6 +97,13 @@ await readFile(resolve(`./${blocklistFilename}`), (line, rl) => {
   // because we are blocking all subdomains
   // Example: fourth.third.example.com => ["example.com", "third.example.com", "fourth.third.example.com"]
   for (const item of extractDomain(domain).slice(1)) {
+    // Check for any higher level domain matches in the allowlist
+    if (allowlist.has(item)) {
+      if (DEBUG) console.log(`Found parent domain ${item} in allowlist - Skipping ${domain}`);
+      allowedDomainCount++;
+      return;
+    }
+
     if (!blocklist.has(item)) continue;
 
     // The higher-level domain is already blocked
