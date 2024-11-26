@@ -1,24 +1,21 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 
-import {
-  createZeroTrustListsAtOnce,
-  createZeroTrustListsOneByOne,
-} from "./lib/api.js";
+import { createZeroTrustListsOneByOne } from "./lib/api.js";
 import {
   DEBUG,
   DRY_RUN,
-  FAST_MODE,
   LIST_ITEM_LIMIT,
   LIST_ITEM_SIZE,
   PROCESSING_FILENAME,
 } from "./lib/constants.js";
-import { normalizeDomain, notifyWebhook } from "./lib/helpers.js";
+import { normalizeDomain } from "./lib/helpers.js";
 import {
   extractDomain,
   isComment,
   isValidDomain,
   memoize,
+  notifyWebhook,
   readFile,
 } from "./lib/utils.js";
 
@@ -135,12 +132,7 @@ console.log("\n\n");
     `Creating ${numberOfLists} lists for ${domains.length} domains...`
   );
 
-  if (FAST_MODE) {
-    await createZeroTrustListsAtOnce(domains);
-  } else {
-    await createZeroTrustListsOneByOne(domains);
-  }
-
+  await createZeroTrustListsOneByOne(domains);
   await notifyWebhook(
     `CF List Create script finished running (${domains.length} domains, ${numberOfLists} lists)`
   );
