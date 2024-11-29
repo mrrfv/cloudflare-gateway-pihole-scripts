@@ -34,6 +34,14 @@ let duplicateDomainCount = 0;
 let allowedDomainCount = 0;
 const memoizedNormalizeDomain = memoize(normalizeDomain);
 
+// Check if the blocklist.txt and allowlist.txt files exist
+for (const filename of [allowlistFilename, blocklistFilename]) {
+  if (!existsSync(filename)) {
+    console.error(`File not found: ${filename}. Please create a block/allowlist first, or run download_lists.js to download the recommended lists.`);
+    process.exit(1);
+  }
+}
+
 // Read allowlist
 console.log(`Processing ${allowlistFilename}`);
 await readFile(resolve(`./${allowlistFilename}`), (line) => {
