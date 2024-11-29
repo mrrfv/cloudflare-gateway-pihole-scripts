@@ -1,6 +1,6 @@
 import { getZeroTrustLists, upsertZeroTrustRule } from "./lib/api.js";
 import { BLOCK_BASED_ON_SNI } from "./lib/constants.js";
-import { notifyWebhook } from "./lib/helpers.js";
+import { notifyWebhook } from "./lib/utils.js";
 
 const { result: lists } = await getZeroTrustLists();
 
@@ -20,10 +20,10 @@ await upsertZeroTrustRule(wirefilterDNSExpression.slice(0, -4), "CGPS Filter Lis
 if (BLOCK_BASED_ON_SNI) {
   const wirefilterSNIExpression = lists.reduce((previous, current) => {
     if (!current.name.startsWith("CGPS List")) return previous;
-  
+
     return `${previous} any(net.sni.domains[*] in \$${current.id}) or `;
   }, "");
-  
+
   console.log("Creating SNI rule...");
   // .slice removes the trailing ' or '
   await upsertZeroTrustRule(wirefilterSNIExpression.slice(0, -4), "CGPS Filter Lists - SNI Based Filtering", ["l4"]);
