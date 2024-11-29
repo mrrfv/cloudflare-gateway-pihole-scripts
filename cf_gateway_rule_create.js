@@ -1,4 +1,4 @@
-import { createZeroTrustRule, getZeroTrustLists } from "./lib/api.js";
+import { getZeroTrustLists, upsertZeroTrustRule } from "./lib/api.js";
 import { BLOCK_BASED_ON_SNI } from "./lib/constants.js";
 import { notifyWebhook } from "./lib/helpers.js";
 
@@ -13,7 +13,7 @@ const wirefilterDNSExpression = lists.reduce((previous, current) => {
 
 console.log("Creating DNS rule...");
 // .slice removes the trailing ' or '
-await createZeroTrustRule(wirefilterDNSExpression.slice(0, -4), "CGPS Filter Lists", ["dns"]);
+await upsertZeroTrustRule(wirefilterDNSExpression.slice(0, -4), "CGPS Filter Lists", ["dns"]);
 
 // Optionally create a rule that matches the SNI.
 // This only works for users who proxy their traffic through Cloudflare.
@@ -26,7 +26,7 @@ if (BLOCK_BASED_ON_SNI) {
   
   console.log("Creating SNI rule...");
   // .slice removes the trailing ' or '
-  await createZeroTrustRule(wirefilterSNIExpression.slice(0, -4), "CGPS Filter Lists - SNI Based Filtering", ["l4"]);
+  await upsertZeroTrustRule(wirefilterSNIExpression.slice(0, -4), "CGPS Filter Lists - SNI Based Filtering", ["l4"]);
 }
 
 // Send a notification to the webhook
