@@ -19,10 +19,11 @@ jobs:
   cgps:
     runs-on: ubuntu-latest
     steps:
-      - name: Clone repository
-        run: |
-         git clone https://github.com/${{ github.repository }}.git
-         cd cloudflare-gateway-pihole-scripts
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: "tuanductran/cloudflare-gateway-pihole-scripts"
+          ref: "v1"
 
       - name: Install Node.js
         uses: actions/setup-node@v4
