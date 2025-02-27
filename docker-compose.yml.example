@@ -7,6 +7,7 @@ services:
     network_mode: bridge
     #tty:true # Only needed if you want crond logs in the docker log (noisy)
     environment:
+      TZ: "${TZ:-UTC}"
       CRON_SCHEDULE: "${CRON_SCHEDULE:-0 3 * * 1}"
       CLOUDFLARE_API_TOKEN: "${CLOUDFLARE_API_TOKEN}"
       CLOUDFLARE_ACCOUNT_ID: "${CLOUDFLARE_ACCOUNT_ID}"

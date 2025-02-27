@@ -6,7 +6,7 @@ WORKDIR /app
 ADD . /app
 
 # Install project dependencies and set permissions
-RUN npm ci && chmod +x /app/docker-entrypoint.sh
+RUN apk add --no-cache tzdata && npm ci && chmod +x /app/docker-entrypoint.sh
 
 # Run the entrypoint script on container startup
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
