@@ -5,6 +5,7 @@ services:
     image: ghcr.io/mrrfv/cloudflare-gateway-pihole-scripts:${IMAGE_TAG:-latest}
     restart: unless-stopped
     network_mode: bridge
+    tty:true
     environment:
       CRON_SCHEDULE: "${CRON_SCHEDULE:-0 3 * * 1}"
       CLOUDFLARE_API_TOKEN: "${CLOUDFLARE_API_TOKEN}"
