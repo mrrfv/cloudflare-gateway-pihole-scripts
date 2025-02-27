@@ -1,6 +1,9 @@
 name: Publish to container registry
 
 on:
+  push:
+    branches:
+      - v*
   release:
     types: [ "published" ]
 
