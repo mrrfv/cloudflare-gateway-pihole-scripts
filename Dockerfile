@@ -5,8 +5,8 @@ WORKDIR /app
 # Add project source to image
 ADD . /app
 
-# Install project dependencies
-RUN npm ci
+# Install project dependencies and set permissions
+RUN npm ci && chmod +x /app/docker-entrypoint.sh
 
 # Run the entrypoint script on container startup
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
