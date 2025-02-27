@@ -5,8 +5,8 @@ WORKDIR /app
 # Add project source to image
 ADD . /app
 
-# Install project and cron entry
-RUN npm ci && echo "0 3 * * 1 /bin/bash /app/update_filter_lists.sh" | crontab -
+# Install project dependencies
+RUN npm ci
 
-# Run the command on container startup
-ENTRYPOINT ["/usr/sbin/crond", "-l", "2", "-f"]
+# Run the entrypoint script on container startup
+ENTRYPOINT ["/app/docker-entrypoint.sh"]

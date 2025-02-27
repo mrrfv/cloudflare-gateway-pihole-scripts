@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     network_mode: bridge
     environment:
+      CRON_SCHEDULE: "${CRON_SCHEDULE:-0 3 * * 1}"
       CLOUDFLARE_API_TOKEN: "${CLOUDFLARE_API_TOKEN}"
       CLOUDFLARE_ACCOUNT_ID: "${CLOUDFLARE_ACCOUNT_ID}"
       CLOUDFLARE_LIST_ITEM_LIMIT: "${CLOUDFLARE_LIST_ITEM_LIMIT:-300000}"
