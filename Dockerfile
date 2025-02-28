@@ -1,4 +1,6 @@
-FROM docker.io/node:22.14.0-alpine
+ARG NODE_VERSION
+
+FROM docker.io/node:${NODE_VERSION}-alpine
 
 WORKDIR /app
 
