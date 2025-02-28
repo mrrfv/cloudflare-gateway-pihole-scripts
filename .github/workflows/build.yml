@@ -22,6 +22,9 @@ jobs:
       packages: write
 
     steps:
+      - name: Get Node Version
+        run: echo "NODE_VERSION=$(cat .node-version)" >> $GITHUB_ENV
+
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
@@ -53,7 +56,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
-            NODE_VERSION=$(cat .node-version)
+            NODE_VERSION=${{ env.NODE_VERSION }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
