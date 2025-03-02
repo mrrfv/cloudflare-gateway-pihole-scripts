@@ -6,12 +6,19 @@ on:
       - v*
   release:
     types: [ "published" ]
+  # The "Sync branch" workflow doesn't trigger the push event, therefore we need a separate trigger for that
+  workflow_run:
+    workflows: [Sync branch]
+    types:
+      - completed
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  # Branch to build the container image from
+  BRANCH: v1
 
 jobs:
   build:
@@ -24,6 +31,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BRANCH }}
 
       - name: Get Node Version
         run: echo "NODE_VERSION=$(cat .node-version)" >> $GITHUB_ENV
