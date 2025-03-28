@@ -1,0 +1,21 @@
+services:
+  cgps:
+    container_name: ${CONTAINER_NAME:-cgps}
+    hostname: ${CONTAINER_NAME:-cgps}
+    image: ghcr.io/mrrfv/cloudflare-gateway-pihole-scripts:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    network_mode: bridge
+    #tty:true # Only needed if you want crond logs in the docker log (noisy)
+    environment:
+      TZ: "${TZ:-UTC}"
+      CRON_SCHEDULE: "${CRON_SCHEDULE:-0 3 * * 1}"
+      CLOUDFLARE_API_TOKEN: "${CLOUDFLARE_API_TOKEN}"
+      CLOUDFLARE_ACCOUNT_ID: "${CLOUDFLARE_ACCOUNT_ID}"
+      CLOUDFLARE_LIST_ITEM_LIMIT: "${CLOUDFLARE_LIST_ITEM_LIMIT:-300000}"
+      DRY_RUN: "${DRY_RUN:-0}"
+      BLOCK_PAGE_ENABLED: "${BLOCK_PAGE_ENABLED:-0}"
+      BLOCK_BASED_ON_SNI: "${BLOCK_BASED_ON_SNI:-0}"
+      ALLOWLIST_URLS: "${ALLOWLIST_URLS}"
+      BLOCKLIST_URLS: "${BLOCKLIST_URLS}"
+      #PING_URL: "${PING_URL}"
+      #DISCORD_WEBHOOK_URL: "${DISCORD_WEBHOOK_URL}"
