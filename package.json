@@ -12,7 +12,8 @@
     "cloudflare-create:rule": "node cf_gateway_rule_create.js",
     "cloudflare-create:list": "node cf_list_create.js",
     "cloudflare-delete:rule": "node cf_gateway_rule_delete.js",
-    "cloudflare-delete:list": "node cf_list_delete.js"
+    "cloudflare-delete:list": "node cf_list_delete.js",
+    "cloudflare-defragment": "node cf_defragment.js"
   },
   "type": "module",
   "dependencies": {
