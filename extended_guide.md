@@ -40,10 +40,6 @@ The Cloudflare list item limit is the maximum number of items (blocked domains) 
 
 Processes block/allow lists without actually adding/removing domains from Cloudflare. Avoid using this option unless you know what you are doing.
 
-#### `FAST_MODE`
-
-Sends requests much faster, but might cause rate limiting issues. Use with caution.
-
 ## Example usage
 
 These commands should be run in a terminal.
