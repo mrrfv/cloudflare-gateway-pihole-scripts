@@ -67,11 +67,9 @@ jobs:
         env:
           PING_URL: ${{ secrets.PING_URL }}
 
-  keepalive:
-    runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - uses: gautamkrishnar/keepalive-workflow@v2
+      - name: Keepalive workflow
+        permissions:
+          actions: write
+        run: npm run keepalive
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

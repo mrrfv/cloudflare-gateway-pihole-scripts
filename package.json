@@ -10,11 +10,13 @@
     "cloudflare-create:rule": "node cf_gateway_rule_create.js",
     "cloudflare-create:list": "node cf_list_create.js",
     "cloudflare-delete:rule": "node cf_gateway_rule_delete.js",
-    "cloudflare-delete:list": "node cf_list_delete.js"
+    "cloudflare-delete:list": "node cf_list_delete.js",
+    "keepalive": "node keepalive.js"
   },
   "type": "module",
   "dependencies": {
     "dotenv": "16.5.0",
+    "keepalive-workflow": "2.0.9",
     "node-fetch": "3.3.2"
   },
   "engines": {
