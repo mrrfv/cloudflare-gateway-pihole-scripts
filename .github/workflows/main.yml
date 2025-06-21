@@ -2,7 +2,7 @@ name: Update Filter Lists
 
 on:
   schedule:
-    - cron: "0 3 * * *"
+    - cron: "0 20 * * *"
   push:
     branches:
       - main
@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          repository: "mrrfv/cloudflare-gateway-pihole-scripts"
+          ref: "v1"
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -47,7 +50,6 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          FAST_MODE: ${{ vars.FAST_MODE }}
 
       - name: Create new rules and lists
         run: npm run cloudflare-create
@@ -57,7 +59,6 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_LIST_ITEM_LIMIT: ${{ secrets.CLOUDFLARE_LIST_ITEM_LIMIT }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          FAST_MODE: ${{ vars.FAST_MODE }}
 
       - name: Send ping request
         if: env.PING_URL != ''
@@ -67,10 +68,9 @@ jobs:
           PING_URL: ${{ secrets.PING_URL }}
 
   keepalive:
+    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     permissions:
       actions: write
-      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: gautamkrishnar/keepalive-workflow@v2
+      - uses: liskin/gh-workflow-keepalive@v1
