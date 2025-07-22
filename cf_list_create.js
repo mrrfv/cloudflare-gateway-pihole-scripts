@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 
-import { createZeroTrustListsOneByOne } from "./lib/api.js";
+import { synchronizeZeroTrustLists } from "./lib/api.js";
 import {
   DEBUG,
   DRY_RUN,
@@ -147,7 +147,7 @@ console.log("\n\n");
     `Creating ${numberOfLists} lists for ${domains.length} domains...`
   );
 
-  await createZeroTrustListsOneByOne(domains);
+  await synchronizeZeroTrustLists(domains);
   await notifyWebhook(
     `CF List Create script finished running (${domains.length} domains, ${numberOfLists} lists)`
   );
