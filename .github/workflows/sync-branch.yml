@@ -15,7 +15,7 @@ jobs:
     if: ${{ github.repository_id == 635386785 }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: main
       - uses: connor-baer/action-sync-branch@v1.1.1
