@@ -11,7 +11,7 @@ const wirefilterDNSExpression = lists.reduce((previous, current) => {
   return `${previous} any(dns.domains[*] in \$${current.id}) or `;
 }, "");
 
-console.log("Creating DNS rule...");
+console.log("Checking DNS rule...");
 // .slice removes the trailing ' or '
 await upsertZeroTrustRule(wirefilterDNSExpression.slice(0, -4), "CGPS Filter Lists", ["dns"]);
 
