@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "npm run download && npm run cloudflare-delete && npm run cloudflare-create",
+    "start": "npm run download && npm run cloudflare-create",
     "dry": "npm run download && DRY_RUN=1 npm run cloudflare-create:list",
     "download": "node download_lists.js",
     "download:allowlist": "node download_lists.js allowlist",

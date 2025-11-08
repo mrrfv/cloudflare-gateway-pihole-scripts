@@ -38,17 +38,18 @@ Cloudflare Gateway allows you to create custom rules to filter HTTP, DNS, and ne
 1. Clone this repository.
 2. Run `npm install` to install dependencies.
 3. Copy `.env.example` to `.env` and fill in the values.
-4. If this is a subsequent run, execute `node cf_gateway_rule_delete.js` and `node cf_list_delete.js` (in order) to delete old data.
-5. If you haven't downloaded any filters yourself, run the `node download_lists.js` command to download recommended filter lists (about 50 000 domains).
-6. Run `node cf_list_create.js` to create the lists in Cloudflare Gateway. This will take a while.
-7. Run `node cf_gateway_rule_create.js` to create the firewall rule in Cloudflare Gateway.
-8. Profit!
+4. If you haven't downloaded any filters yourself, run the `node download_lists.js` command to download recommended filter lists (OISD Small and AdAway; about 50 000 domains).
+5. Run `node cf_list_create.js` to create the lists in Cloudflare Gateway. This will take a while.
+6. Run `node cf_gateway_rule_create.js` to create the firewall rule in Cloudflare Gateway.
+7. Profit! Time is money after all. You can update the lists by repeating steps 4, 5 and 6.
 
 ### Running in GitHub Actions
 
-These scripts can be run using GitHub Actions so your filters will be automatically updated and pushed to Cloudflare Gateway. This is useful if you are using a frequently updated malware blocklist.
+These scripts can be run using GitHub Actions so your filters will be automatically updated and pushed to Cloudflare Gateway. This is useful if you are using a frequently updated blocklist.
 
-Please note that the GitHub Action downloads the recommended blocklists and whitelist by default. You can change this behavior by setting Actions variables.
+Please note that:
+- GitHub Actions wasn't intended to be used for this purpose, therefore the local options are recommended.
+- the GitHub Action downloads the recommended blocklists and whitelist by default. You can change this behavior by setting Actions variables.
 
 1. Create a new empty, private repository. Forking or public repositories are discouraged, but supported - although the script never leaks your API keys and GitHub Actions secrets are automatically redacted from the logs, it's better to be safe than sorry. There is **no need to use the "Sync fork" button** if you're doing that! The GitHub Action downloads the latest code regardless of what's in your forked repository.
 2. Create the following GitHub Actions secrets in your repository settings:
