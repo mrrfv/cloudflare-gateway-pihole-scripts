@@ -67,7 +67,7 @@ Please note that:
 
 ### DNS setup for Cloudflare Gateway
 
-1. Go to your Cloudflare Zero Trust dashboard, and navigate to Gateway -> DNS Locations.
+1. Go to your Cloudflare Zero Trust dashboard, and navigate to Networks -> Resolvers & Proxies -> DNS locations.
 2. Click on the default location or create one if it doesn't exist.
 3. Configure your router or device based on the provided DNS addresses.
 
