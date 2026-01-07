@@ -13,12 +13,9 @@ on:
       - completed
 
 env:
-  # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  # Branch to build the container image from
-  BRANCH: v1
+  BRANCH: main  # Đổi từ v1 sang main
 
 jobs:
   build:
