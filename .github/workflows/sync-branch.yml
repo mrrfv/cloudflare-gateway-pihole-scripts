@@ -8,7 +8,7 @@ on:
 jobs:
   sync-branch:
     name: Update v1 branch
-    runs-on: ubuntu-latest
+    runs-on: tenki-standard-medium-4c-8g
     permissions:
       contents: write
     # Only run on original repository
