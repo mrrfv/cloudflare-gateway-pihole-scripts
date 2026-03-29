@@ -5,7 +5,7 @@ on:
     branches:
       - v*
   release:
-    types: [ "published" ]
+    types: ["published"]
   # The "Sync branch" workflow doesn't trigger the push event, therefore we need a separate trigger for that
   workflow_run:
     workflows: [Sync branch]
@@ -22,7 +22,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: tenki-standard-medium-4c-8g
 
     permissions:
       contents: read
