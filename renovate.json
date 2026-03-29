@@ -1,12 +1,35 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
   "extends": [
     "config:recommended",
-    "config:js-app",
-    ":automergeBranch",
-    ":automergeMinor"
+    "config:js-app"
   ],
-  "github-actions": {
-    "fileMatch": ["^auto_update_github_action.yml$"]
-  }
+
+  "automerge": false,
+
+  "minimumReleaseAge": "8 days",
+
+  "dependencyDashboard": true,
+
+  "separateMajorMinor": true,
+  "separateMultipleMajor": true,
+
+  "rangeStrategy": "pin",
+
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 3am on monday"]
+  },
+
+  "packageRules": [
+    {
+      "matchManagers": ["dockerfile"],
+      "pinDigests": true
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "pinDigests": true
+    }
+  ]
 }
