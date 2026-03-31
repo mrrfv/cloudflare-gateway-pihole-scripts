@@ -17,8 +17,7 @@
   },
   "type": "module",
   "dependencies": {
-    "dotenv": "17.3.1",
-    "node-fetch": "3.3.2"
+    "dotenv": "17.3.1"
   },
   "engines": {
     "node": "24.14.1"
