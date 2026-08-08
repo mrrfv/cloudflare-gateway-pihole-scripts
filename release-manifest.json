@@ -1,0 +1,9 @@
+{
+  "name": "Cloudflare Gateway DNS Filter Pro",
+  "version": "1.0.0-rc.1",
+  "status": "release-candidate",
+  "phasesCompleted": 13,
+  "githubModified": false,
+  "productionConfirmed": false,
+  "finalProductionRelease": false
+}
