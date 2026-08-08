@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0-rc.1",
+  "productionConfirmationDefault": false,
+  "dryRunDefault": true,
+  "allowLegacyApiKey": false,
+  "strictBooleanEnvironmentValues": true,
+  "requireCloudflareSuccess": true,
+  "requireHttpSuccess": true,
+  "preserveExistingSyncAlgorithm": true,
+  "requireRegressionTests": true,
+  "requireRollbackTest": true
+}
