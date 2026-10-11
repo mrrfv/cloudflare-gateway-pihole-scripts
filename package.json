@@ -17,7 +17,7 @@
   },
   "type": "module",
   "dependencies": {
-    "dotenv": "17.4.2"
+    "dotenv": "18.0.5"
   },
   "engines": {
     "node": "24.18.1"
