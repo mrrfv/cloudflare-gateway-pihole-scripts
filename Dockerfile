@@ -8,7 +8,11 @@ WORKDIR /app
 ADD . /app
 
 # Install project dependencies and set permissions
-RUN apk add --no-cache tzdata && npm ci && chmod +x /app/docker-entrypoint.sh
+RUN apk add --no-cache tzdata && npm ci && chmod +x /app/docker-entrypoint.sh \
+    && chown -R node:node /app
 
-# Run the entrypoint script on container startup
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
+
+# Run the bundled cron; override to drive the image from an external scheduler
+# e.g. `docker run <image> npm start --prefix /app/`
+CMD ["/usr/sbin/crond", "-f", "-l", "2"]
