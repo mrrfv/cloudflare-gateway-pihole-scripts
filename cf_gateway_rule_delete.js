@@ -1,6 +1,11 @@
 import { deleteZeroTrustRule, getZeroTrustRules } from "./lib/api.js";
-import { DELETION_ENABLED } from "./lib/constants.js";
+import { DELETION_ENABLED, DRY_RUN } from "./lib/constants.js";
 import { notifyWebhook } from "./lib/utils.js";
+
+if (DRY_RUN) {
+  console.log("DRY_RUN: skipping Cloudflare changes.");
+  process.exit(0);
+}
 
 if (!DELETION_ENABLED) {
   console.warn(

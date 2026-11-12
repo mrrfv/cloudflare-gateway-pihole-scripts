@@ -38,7 +38,11 @@ The Cloudflare list item limit is the maximum number of items (blocked domains) 
 
 #### `DRY_RUN`
 
-Processes block/allow lists without actually adding/removing domains from Cloudflare. Avoid using this option unless you know what you are doing.
+Set to `1` or `true` to prevent Cloudflare Gateway writes and Discord notifications. Downloads and local list processing can still run.
+
+#### `CGPS_DELETION_ENABLED`
+
+Set to `true` or `1` to allow deleting Gateway lists/rules or running defragmentation. Unset, empty, `false`, and `0` leave deletion disabled.
 
 ## Example usage
 

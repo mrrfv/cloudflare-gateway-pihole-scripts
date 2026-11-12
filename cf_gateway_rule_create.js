@@ -1,6 +1,11 @@
 import { getZeroTrustLists, upsertZeroTrustDNSRule, upsertZeroTrustSNIRule } from "./lib/api.js";
-import { BLOCK_BASED_ON_SNI } from "./lib/constants.js";
+import { BLOCK_BASED_ON_SNI, DRY_RUN } from "./lib/constants.js";
 import { notifyWebhook } from "./lib/utils.js";
+
+if (DRY_RUN) {
+  console.log("DRY_RUN: skipping Cloudflare changes.");
+  process.exit(0);
+}
 
 const { result: lists } = await getZeroTrustLists();
 

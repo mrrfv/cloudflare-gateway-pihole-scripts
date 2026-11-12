@@ -4,8 +4,17 @@ import {
   upsertZeroTrustSNIRule,
   deleteZeroTrustListsOneByOne
 } from "./lib/api.js";
-import { BLOCK_BASED_ON_SNI } from "./lib/constants.js";
+import { BLOCK_BASED_ON_SNI, DELETION_ENABLED, DRY_RUN } from "./lib/constants.js";
 import { notifyWebhook } from "./lib/utils.js";
+
+if (DRY_RUN) {
+  console.log("DRY_RUN: skipping Cloudflare changes.");
+  process.exit(0);
+}
+
+if (!DELETION_ENABLED) {
+  throw new Error("Defragmentation can delete empty lists. Set CGPS_DELETION_ENABLED=true or 1 to proceed.");
+}
 
 // Defragment the lists and rewrite the rules
 const { emptyLists, nonEmptyLists, stats } = await defragmentZeroTrustLists();

@@ -20,8 +20,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
-          repository: "mrrfv/cloudflare-gateway-pihole-scripts"
-          ref: "f85b111ec463a654f109630e4a7501c6601e781b" # upstream v1
           persist-credentials: false
 
       - name: Install Node.js

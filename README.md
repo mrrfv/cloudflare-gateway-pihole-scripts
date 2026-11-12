@@ -81,7 +81,9 @@ The default filter lists are only optimized for ad & tracker blocking because Cl
 
 To see if e.g. your filter lists are valid without actually changing anything in your Cloudflare account, you can set the `DRY_RUN` environment variable to 1, either in `.env` or the regular way. This will only print info such as the lists that would be created or the amount of duplicate domains to the console.
 
-**Warning:** This currently only works for `cf_list_create.js`.
+With `DRY_RUN=1` (or `true`), Gateway requests are limited to GET and HEAD and Discord notifications are skipped. List creation still reports local list statistics. Rule creation, deletion, and defragmentation exit without modifying Gateway. Download commands may still fetch lists and write local files.
+
+Deleting Gateway lists or rules and running defragmentation require explicit opt-in via `CGPS_DELETION_ENABLED=true` or `1`. Normal synchronization can still update list entries outside dry runs.
 
 <!-- markdownlint-disable-next-line MD026 -->
 ## Why not...
